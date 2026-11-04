@@ -1,136 +1,117 @@
 // js/app.js
 document.addEventListener("DOMContentLoaded", () => {
-  const contenedor = document.getElementById("contenedor-modulos");
-  const inputBusqueda = document.getElementById("input-busqueda");
-  const selectDocente = document.getElementById("select-docente");
-  const contador = document.getElementById("contador-modulos");
-  const fillProgreso = document.getElementById("progreso-fill");
-  const txtProgreso = document.getElementById("progreso-txt");
+  const container = document.getElementById("contenedor-modulos");
+  const inputSearch = document.getElementById("search-input");
+  const selectDocent = document.getElementById("select-filter");
+  const fillProgress = document.getElementById("progress-fill");
+  const txtProgress = document.getElementById("progress-txt");
   const modal = document.getElementById("modal-ficha");
   const modalBody = document.getElementById("modal-body");
-  const btnCerrarModal = document.getElementById("btn-cerrar-modal");
+  const closeModal = document.getElementById("close-modal");
 
-  // Estado guardado en LocalStorage
-  let repasados = JSON.parse(localStorage.getItem("repasados_3dsb") || "[]");
+  let completed = JSON.parse(localStorage.getItem("repasados_3dsb_v2") || "[]");
 
-  function guardarYActualizarProgreso() {
-    localStorage.setItem("repasados_3dsb", JSON.stringify(repasados));
-    const pct = Math.round((repasados.length / modulosData.length) * 100);
-    fillProgreso.style.width = `${pct}%`;
-    txtProgreso.textContent = `${repasados.length} de ${modulosData.length} repasados (${pct}%)`;
+  function updateProgress() {
+    localStorage.setItem("repasados_3dsb_v2", JSON.stringify(completed));
+    const pct = Math.round((completed.length / modulosData.length) * 100);
+    fillProgress.style.width = `${pct}%`;
+    txtProgress.textContent = `${completed.length} de ${modulosData.length} repasados (${pct}%)`;
   }
 
-  function renderModulos(lista) {
-    contenedor.innerHTML = "";
-    contador.textContent = `Mostrando ${lista.length} de ${modulosData.length} módulos`;
-
-    if (lista.length === 0) {
-      contenedor.innerHTML = `<p style="grid-column: 1/-1; color: var(--mut);">No se encontraron módulos coincidentes.</p>`;
+  function render(list) {
+    container.innerHTML = "";
+    if (list.length === 0) {
+      container.innerHTML = `<p style="grid-column: 1/-1; color: var(--text-mut);">No se encontraron módulos.</p>`;
       return;
     }
 
-    lista.forEach((mod) => {
-      const esRepasado = repasados.includes(mod.id);
+    list.forEach((mod) => {
+      const isDone = completed.includes(mod.id);
+      const isArcides = mod.docente.includes("Arcides");
       const card = document.createElement("article");
-      card.className = "tarjeta";
+      card.className = `card ${isArcides ? 'docente-arcides' : ''}`;
 
       card.innerHTML = `
         <div>
-          <span class="codigo">${mod.codigo}</span>
-          <h3>${mod.nombre}</h3>
-          <p class="docente">Docente: ${mod.docente}</p>
-          <p class="resumen">${mod.resumen}</p>
+          <span class="card-code">${mod.codigo}</span>
+          <h3 class="card-title">${mod.nombre}</h3>
+          <p class="card-docent">Docente: <strong>${mod.docente}</strong></p>
+          <p class="card-desc">${mod.resumen}</p>
         </div>
-        <div class="acciones">
+        <div class="btn-group">
           <button class="btn btn-primary" data-ver="${mod.id}">Ver Ficha</button>
-          <button class="btn btn-check ${esRepasado ? 'repasado' : ''}" data-repaso="${mod.id}">
-            ${esRepasado ? '✓ Repasado' : 'Marcar Repasado'}
+          <button class="btn btn-check ${isDone ? 'completed' : ''}" data-done="${mod.id}">
+            ${isDone ? '✓ Repasado' : 'Marcar'}
           </button>
         </div>
       `;
-
-      contenedor.appendChild(card);
+      container.appendChild(card);
     });
   }
 
-  function filtrarModulos() {
-    const texto = inputBusqueda.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    const docente = selectDocente.value;
+  function filterData() {
+    const query = inputSearch.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const docent = selectDocent.value;
 
-    const filtrados = modulosData.filter((m) => {
-      const nombreNorm = m.nombre.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-      const codNorm = m.codigo.toLowerCase();
-      const coincideTexto = nombreNorm.includes(texto) || codNorm.includes(texto) || m.resumen.toLowerCase().includes(texto);
-      const coincideDocente = docente === "todos" || m.docente === docente;
-
-      return coincideTexto && coincideDocente;
+    const filtered = modulosData.filter((m) => {
+      const nameNorm = m.nombre.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      const codeNorm = m.codigo.toLowerCase();
+      const matchText = nameNorm.includes(query) || codeNorm.includes(query);
+      const matchDocent = docent === "all" || m.docente === docent;
+      return matchText && matchDocent;
     });
 
-    renderModulos(filtrados);
+    render(filtered);
   }
 
-  function abrirFicha(id) {
+  function openModal(id) {
     const mod = modulosData.find((m) => m.id === id);
     if (!mod) return;
 
     modalBody.innerHTML = `
-      <span class="codigo">${mod.codigo}</span>
-      <h2 style="color: var(--tx); margin-top: 4px;">${mod.nombre}</h2>
-      <p class="docente" style="margin-bottom: 12px;">Docente: ${mod.docente}</p>
-      <p class="resumen">${mod.resumen}</p>
-
-      <div class="sec-ficha">
+      <span class="card-code">${mod.codigo}</span>
+      <h2 style="margin-top:4px;">${mod.nombre}</h2>
+      <p class="card-docent" style="margin-bottom:14px;">Docente: ${mod.docente}</p>
+      
+      <div class="modal-section">
         <h4>Programas</h4>
         <p>${mod.programas.join(", ")}</p>
       </div>
-
-      <div class="sec-ficha">
+      <div class="modal-section">
         <h4>Herramientas</h4>
         <p>${mod.herramientas.join(", ")}</p>
       </div>
-
-      <div class="sec-ficha">
-        <h4>Instrumentos de evaluación</h4>
+      <div class="modal-section">
+        <h4>Instrumentos</h4>
         <p>${mod.instrumentos.join(", ")}</p>
       </div>
-
-      <div class="sec-ficha">
-        <h4>Recursos de estudio</h4>
+      <div class="modal-section">
+        <h4>Recursos</h4>
         <ul>
-          ${mod.recursos.map(r => `<li><a href="${r.url}" target="_blank" style="color:var(--cy);">${r.titulo}</a></li>`).join('')}
+          ${mod.recursos.map(r => `<li><a href="${r.url}" target="_blank" style="color:var(--border-cy);">${r.titulo}</a></li>`).join('')}
         </ul>
       </div>
     `;
-
     modal.showModal();
   }
 
-  // Delegación de eventos para botones dinámicos
-  contenedor.addEventListener("click", (e) => {
+  container.addEventListener("click", (e) => {
     const btnVer = e.target.closest("[data-ver]");
-    const btnRepaso = e.target.closest("[data-repaso]");
+    const btnDone = e.target.closest("[data-done]");
 
-    if (btnVer) {
-      abrirFicha(btnVer.getAttribute("data-ver"));
-    }
-
-    if (btnRepaso) {
-      const id = btnRepaso.getAttribute("data-repaso");
-      if (repasados.includes(id)) {
-        repasados = repasados.filter((itemId) => itemId !== id);
-      } else {
-        repasados.push(id);
-      }
-      guardarYActualizarProgreso();
-      filtrarModulos();
+    if (btnVer) openModal(btnVer.getAttribute("data-ver"));
+    if (btnDone) {
+      const id = btnDone.getAttribute("data-done");
+      completed = completed.includes(id) ? completed.filter(i => i !== id) : [...completed, id];
+      updateProgress();
+      filterData();
     }
   });
 
-  inputBusqueda.addEventListener("input", filtrarModulos);
-  selectDocente.addEventListener("change", filtrarModulos);
-  btnCerrarModal.addEventListener("click", () => modal.close());
+  inputSearch.addEventListener("input", filterData);
+  selectDocent.addEventListener("change", filterData);
+  closeModal.addEventListener("click", () => modal.close());
 
-  // Inicialización
-  guardarYActualizarProgreso();
-  renderModulos(modulosData);
+  updateProgress();
+  render(modulosData);
 });

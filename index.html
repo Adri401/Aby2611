@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HUB 3DS·B · Repaso Anual</title>
+  <title>HUB 3DS·B · Repaso de Módulos</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
@@ -11,54 +11,50 @@
 </head>
 <body>
 
-  <header>
-    <div class="wrap">
-      <h1>HUB 3.º DS «B»</h1>
-      <p class="lead">Portal de repaso anual de módulos · Instituto Nacional Cantón Lourdes (INDEL)</p>
+  <header class="wrap">
+    <span class="badge">INDEL · 3.º DS «B»</span>
+    <h1>HUB DE REPASO ANUAL</h1>
+    <p class="lead">Portal interactivo de módulos académicos para el año escolar</p>
 
-      <!-- Barra de progreso -->
-      <div class="progreso-bar">
-        <span id="progreso-txt" style="font-weight:600; font-size:0.9rem;">0 de 4 repasados (0%)</span>
-        <div class="pista">
-          <div id="progreso-fill" class="pista-fill"></div>
-        </div>
+    <!-- Barra de progreso -->
+    <div class="progress-container">
+      <div class="progress-info">
+        <span>Progreso general de repaso</span>
+        <span id="progress-txt">0 de 4 repasados (0%)</span>
+      </div>
+      <div class="progress-bar">
+        <div id="progress-fill" class="progress-fill"></div>
       </div>
     </div>
   </header>
 
   <main class="wrap">
-    <!-- Buscador y filtros -->
-    <section class="controles">
-      <input type="text" id="input-busqueda" placeholder="Buscar módulo por código, nombre o palabra clave...">
-      <select id="select-docente">
-        <option value="todos">Todos los docentes</option>
+    <!-- Buscador y filtro -->
+    <div class="controls">
+      <input type="text" id="search-input" class="search-input" placeholder="Buscar módulo (ej. BTVDS 3.1, móviles, inglés)...">
+      <select id="select-filter" class="select-filter">
+        <option value="all">Todos los docentes</option>
         <option value="Javier Mineros">Javier Mineros</option>
         <option value="Arcides Canales">Arcides Canales</option>
       </select>
-    </section>
+    </div>
 
-    <p id="contador-modulos" style="color:var(--mut); margin-bottom: 16px; font-size: 0.9rem;"></p>
-
-    <!-- Grid de módulos dinámicos -->
-    <section id="contenedor-modulos" class="grid-modulos">
-      <!-- Pintado desde js/app.js -->
-    </section>
+    <!-- Contenedor dinámico de 4 tarjetas -->
+    <section id="contenedor-modulos" class="grid-cards"></section>
   </main>
 
-  <!-- Modal Ficha de Módulo -->
+  <!-- Modal Ficha -->
   <dialog id="modal-ficha">
-    <div class="modal-head">
-      <span>Ficha de Módulo</span>
-      <button id="btn-cerrar-modal" class="close-btn">&times;</button>
+    <div class="modal-header">
+      <span style="font-family:var(--font-fd); font-size:0.85rem; color:var(--text-mut);">FICHA TÉCNICA</span>
+      <button id="close-modal" class="close-modal">&times;</button>
     </div>
-    <div id="modal-body">
-      <!-- Se llena dinámicamente -->
-    </div>
+    <div id="modal-body"></div>
   </dialog>
 
   <footer>
     <div class="wrap">
-      <p>Desarrollado por el equipo de 3.º Bachillerato Vocacional en Desarrollo de Software «B»</p>
+      <p>Diseñado para el 3.º Bachillerato Técnico Vocacional en Desarrollo de Software «B»</p>
     </div>
   </footer>
 

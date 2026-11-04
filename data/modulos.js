@@ -4,21 +4,22 @@ const modulosData = [
     id: "btvds-3-1",
     codigo: "BTVDS 3.1",
     nombre: "Desarrollo de aplicaciones de software para la solución de problemas",
-    docente: "Javier Mineros",
-    resumen: "Diseño, lógica e implementación de soluciones de software estructuradas.",
+    docente: "Arcides Canales",
+    resumen: "Diseño, lógica e implementación de soluciones de software estructuradas y orientadas a objetos.",
     programas: ["Visual Studio Code", "Git", "Google Chrome"],
     herramientas: ["HTML5", "CSS3", "JavaScript", "GitHub"],
-    instrumentos: ["Rúbrica de evaluación", "Guía de desarrollo"],
+    instrumentos: ["Rúbrica de evaluación", "Guía de desarrollo N° 1"],
     recursos: [
-      { titulo: "MDN Web Docs", url: "https://developer.mozilla.org/es/" }
+      { titulo: "MDN Web Docs - HTML & JS", url: "https://developer.mozilla.org/es/" },
+      { titulo: "Pro Git Book", url: "https://git-scm.com/book/es/v2" }
     ],
     evidencias: ["https://github.com/Adri401/Aby2611"],
     quiz: [
       {
-        pregunta: "¿Qué sistema se usa para control de versiones?",
+        pregunta: "¿Qué herramienta se utiliza para el control de versiones?",
         opciones: ["Git", "MySQL", "VS Code", "HTML"],
         respuesta: 0,
-        explicacion: "Git registra los cambios en el código fuente."
+        explicacion: "Git registra y gestiona el historial de cambios en el código."
       }
     ]
   },
@@ -26,21 +27,21 @@ const modulosData = [
     id: "btvds-3-5",
     codigo: "BTVDS 3.5",
     nombre: "Desarrollo de componentes para dispositivos móviles",
-    docente: "Javier Mineros",
-    resumen: "Creación de interfaces responsivas y componentes para smartphones.",
-    programas: ["Android Studio", "VS Code"],
-    herramientas: ["PWA", "CSS Responsive", "JavaScript"],
-    instrumentos: ["Rúbrica de interfaz UI/UX", "Lista de cotejo"],
+    docente: "Arcides Canales",
+    resumen: "Diseño de interfaces adaptables, componentes móviles y desarrollo de PWA.",
+    programas: ["Android Studio", "VS Code", "Navegador Web"],
+    herramientas: ["PWA", "CSS Responsive", "JavaScript", "Flutter"],
+    instrumentos: ["Rúbrica de interfaz UI/UX", "Lista de cotejo móvil"],
     recursos: [
       { titulo: "Google Web Dev - PWA", url: "https://web.dev/explore/progressive-web-apps" }
     ],
     evidencias: ["https://github.com/Adri401/Aby2611"],
     quiz: [
       {
-        pregunta: "¿Qué permite que una web funcione como app nativa?",
+        pregunta: "¿Qué tecnología permite crear aplicaciones web progresivas?",
         opciones: ["PWA", "SQL", "FTP", "DNS"],
         respuesta: 0,
-        explicacion: "PWA es la sigla de Progressive Web App."
+        explicacion: "PWA (Progressive Web App) brinda comportamiento nativo a sitios web."
       }
     ]
   },
@@ -49,10 +50,10 @@ const modulosData = [
     codigo: "BTVDS 3.6",
     nombre: "Conversación de inglés sobre mantenimiento de sistemas informáticos",
     docente: "Arcides Canales",
-    resumen: "Comprensión lectora y vocabulario técnico en inglés para soporte.",
+    resumen: "Comprensión lectora, vocabulario técnico en inglés y fluidez oral en soporte de sistemas.",
     programas: ["Duolingo", "Google Translate"],
-    herramientas: ["Glosario técnico de informática"],
-    instrumentos: ["Rúbrica de conversación (Speaking)"],
+    herramientas: ["Technical English Glossary", "Grammar Guide"],
+    instrumentos: ["Rúbrica de Speaking", "Guía de traducción"],
     recursos: [
       { titulo: "BBC Learning English", url: "https://www.bbc.co.uk/learningenglish/" }
     ],
@@ -71,10 +72,10 @@ const modulosData = [
     codigo: "BTVDS 3.7",
     nombre: "Puesta en marcha de la microempresa en asociatividad cooperativa",
     docente: "Arcides Canales",
-    resumen: "Modelado de negocios, asociatividad y plan financiero microempresarial.",
-    programas: ["Microsoft Excel", "Google Sheets"],
+    resumen: "Modelado de negocios, presupuesto microempresarial y organización asociativa.",
+    programas: ["Microsoft Excel", "Google Sheets", "Canva"],
     herramientas: ["Modelo Canvas", "Matriz FODA"],
-    instrumentos: ["Rúbrica de plan de negocios"],
+    instrumentos: ["Rúbrica de plan de negocios", "Estudio de mercado"],
     recursos: [
       { titulo: "Business Model Canvas", url: "https://www.strategyzer.com/canvas/business-model-canvas" }
     ],
@@ -84,7 +85,7 @@ const modulosData = [
         pregunta: "¿Qué herramienta analiza Fortalezas, Oportunidades, Debilidades y Amenazas?",
         opciones: ["Matriz FODA", "Diagrama de Gantt", "Wireframe", "UML"],
         respuesta: 0,
-        explicacion: "La matriz FODA evalúa factores internos y externos."
+        explicacion: "La matriz FODA evalúa diagnósticos internos y externos."
       }
     ]
   }
