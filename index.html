@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HUB 3DS·B · Repaso Anual</title>
+  
+  <!-- Tipografías de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+  
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Encabezado / Portada -->
+  <header>
+    <div class="wrap">
+      <h1>HUB 3.º DS «B»</h1>
+      <p class="subtitulo">Portal de repaso anual de módulos · Instituto Nacional Cantón Lourdes (INDEL)</p>
+    </div>
+  </header>
+
+  <!-- Lista de Módulos Pintada desde JS -->
+  <main class="wrap">
+    <section class="seccion-modulos">
+      <h2>Mapa de Módulos del Año</h2>
+      <div id="contenedor-modulos" class="grid-modulos">
+        <!-- Los módulos se renderizan dinámicamente desde js/app.js -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Pie de página -->
+  <footer>
+    <div class="wrap">
+      <p>Desarrollado por el equipo de 3.º Bachillerato Vocacional en Desarrollo de Software «B»</p>
+    </div>
+  </footer>
+
+  <!-- Carga de scripts -->
+  <script src="data/modulos.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

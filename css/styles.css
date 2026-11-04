@@ -1,0 +1,122 @@
+
+:root {
+  --bg: #070a15;
+  --panel: #0f1630;
+  --panel2: #0b1124;
+  --line: #222c55;
+  --tx: #e8edfb;
+  --mut: #9ba7ce;
+  --cy: #22d3ee;
+  --mg: #f046d2;
+  --gr: #34f5a0;
+  --font-title: 'Orbitron', system-ui, sans-serif;
+  --font-body: 'Exo 2', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--tx);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Encabezado */
+header {
+  padding: 40px 0;
+  border-bottom: 1px solid var(--line);
+  background: radial-gradient(circle at top right, rgba(34, 211, 238, 0.1), transparent);
+}
+
+h1 {
+  font-size: 2.2rem;
+  color: var(--cy);
+  margin-bottom: 8px;
+}
+
+.subtitulo {
+  color: var(--mut);
+  font-size: 1.1rem;
+}
+
+/* Lista de Módulos */
+.seccion-modulos {
+  padding: 40px 0;
+}
+
+h2 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: var(--tx);
+}
+
+.grid-modulos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.tarjeta-modulo {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--cy);
+  border-radius: 12px;
+  padding: 20px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.tarjeta-modulo:hover {
+  transform: translateY(-4px);
+  border-color: var(--cy);
+}
+
+.tarjeta-modulo h3 {
+  font-size: 1.2rem;
+  margin-bottom: 6px;
+  color: var(--tx);
+}
+
+.docente {
+  display: inline-block;
+  font-size: 0.85rem;
+  background: var(--panel2);
+  color: var(--mg);
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.resumen {
+  color: var(--mut);
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+}
+
+.detalles {
+  font-size: 0.85rem;
+  color: var(--tx);
+}
+
+.detalles strong {
+  color: var(--cy);
+}
+
+/* Pie de página */
+footer {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  color: var(--mut);
+  font-size: 0.9rem;
+}
