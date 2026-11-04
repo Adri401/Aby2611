@@ -24,6 +24,79 @@ const modulosData = [
     ]
   },
   {
+    id: "btvds-3-2",
+    codigo: "BTVDS 3.2",
+    nombre: "Elaboración de acuerdos de nivel de servicio (SLA)",
+    docente: "Arcides Canales",
+    resumen: "Creación de documentos SLA para establecer estándares y requisitos del cliente. Mejora del sistema 'La esquina del sabor'.",
+    programas: ["Visual Studio Code", "Word / Google Docs"],
+    herramientas: ["Plantilla SLA", "JavaScript", "HTML/CSS"],
+    instrumentos: ["Plantilla de Acuerdos SLA", "Lista de cotejo de requerimientos"],
+    recursos: [
+      { titulo: "Guía de Acuerdos de Nivel de Servicio (SLA)", url: "https://developer.mozilla.org/es/" }
+    ],
+    evidencias: ["https://github.com/Adri401/Aby2611"],
+    quiz: [
+      {
+        pregunta: "¿Cuál es el objetivo principal de un documento SLA?",
+        opciones: [
+          "Establecer los estándares y requisitos de servicio con el cliente",
+          "Diseñar la base de datos",
+          "Crear el logotipo de la empresa",
+          "Instalar un sistema operativo"
+        ],
+        respuesta: 0,
+        explicacion: "El SLA define los compromisos y calidad de servicio entre el desarrollador y el cliente."
+      }
+    ]
+  },
+  {
+    id: "btvds-3-3",
+    codigo: "BTVDS 3.3",
+    nombre: "Administración de bases de datos masivas y analítica de datos",
+    docente: "Arcides Canales",
+    resumen: "Consultas avanzadas en SQL Server (CRUD) y creación de dashboards interactivos en Power BI y Excel.",
+    programas: ["SQL Server Management Studio", "Power BI", "Microsoft Excel"],
+    herramientas: ["SQL", "Power Query", "Dashboards interactivos"],
+    instrumentos: ["Guía de consultas SQL", "Rúbrica de evaluación de Dashboards"],
+    recursos: [
+      { titulo: "Microsoft Learn - SQL Server", url: "https://learn.microsoft.com/es-es/sql/" },
+      { titulo: "Documentación de Power BI", url: "https://learn.microsoft.com/es-es/power-bi/" }
+    ],
+    evidencias: ["https://github.com/Adri401/Aby2611"],
+    quiz: [
+      {
+        pregunta: "¿Qué herramienta se utilizó para crear dashboards interactivos a partir de grandes volúmenes de datos?",
+        opciones: ["Power BI", "Duolingo", "Android Studio", "Git"],
+        respuesta: 0,
+        explicacion: "Power BI permite modelar y visualizar datos mediante reportes y dashboards dinámicos."
+      }
+    ]
+  },
+  {
+    id: "btvds-3-4",
+    codigo: "BTVDS 3.4",
+    nombre: "Desarrollo multiplataforma y sistemas ERP",
+    docente: "Arcides Canales",
+    resumen: "Desarrollo en Python, PHP, Avalonia y WPF para múltiples plataformas, y gestión modular con Odoo ERP.",
+    programas: ["Visual Studio", "VS Code", "Odoo ERP"],
+    herramientas: ["Python", "PHP", "Avalonia UI", "WPF"],
+    instrumentos: ["Guía de desarrollo multiplataforma", "Lista de cotejo módulos Odoo"],
+    recursos: [
+      { titulo: "Documentación de Python", url: "https://docs.python.org/es/3/" },
+      { titulo: "Odoo Documentation", url: "https://www.odoo.com/documentation" }
+    ],
+    evidencias: ["https://github.com/Adri401/Aby2611"],
+    quiz: [
+      {
+        pregunta: "¿Qué sistema ERP se utilizó para comprender el funcionamiento modular de las aplicaciones empresariales?",
+        opciones: ["Odoo", "SQL Server", "Flutter", "GitHub"],
+        respuesta: 0,
+        explicacion: "Odoo es una plataforma de software ERP basada en módulos de negocio integrados."
+      }
+    ]
+  },
+  {
     id: "btvds-3-5",
     codigo: "BTVDS 3.5",
     nombre: "Desarrollo de componentes para dispositivos móviles",
@@ -82,11 +155,4 @@ const modulosData = [
     evidencias: ["https://github.com/Adri401/Aby2611"],
     quiz: [
       {
-        pregunta: "¿Qué herramienta analiza Fortalezas, Oportunidades, Debilidades y Amenazas?",
-        opciones: ["Matriz FODA", "Diagrama de Gantt", "Wireframe", "UML"],
-        respuesta: 0,
-        explicacion: "La matriz FODA evalúa diagnósticos internos y externos."
-      }
-    ]
-  }
-];
+        pregunta: "¿Qué herramienta analiza Fort
