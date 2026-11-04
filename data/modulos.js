@@ -1,5 +1,6 @@
 // data/modulos.js
 const modulosData = [
+  // --- MÓDULOS PROFESOR ARCIDES CANALES ---
   {
     id: "btvds-3-1",
     codigo: "BTVDS 3.1",
@@ -20,79 +21,6 @@ const modulosData = [
         opciones: ["Git", "MySQL", "VS Code", "HTML"],
         respuesta: 0,
         explicacion: "Git registra y gestiona el historial de cambios en el código."
-      }
-    ]
-  },
-  {
-    id: "btvds-3-2",
-    codigo: "BTVDS 3.2",
-    nombre: "Elaboración de acuerdos de nivel de servicio (SLA)",
-    docente: "Arcides Canales",
-    resumen: "Creación de documentos SLA para establecer estándares y requisitos del cliente. Mejora del sistema 'La esquina del sabor'.",
-    programas: ["Visual Studio Code", "Word / Google Docs"],
-    herramientas: ["Plantilla SLA", "JavaScript", "HTML/CSS"],
-    instrumentos: ["Plantilla de Acuerdos SLA", "Lista de cotejo de requerimientos"],
-    recursos: [
-      { titulo: "Guía de Acuerdos de Nivel de Servicio (SLA)", url: "https://developer.mozilla.org/es/" }
-    ],
-    evidencias: ["https://github.com/Adri401/Aby2611"],
-    quiz: [
-      {
-        pregunta: "¿Cuál es el objetivo principal de un documento SLA?",
-        opciones: [
-          "Establecer los estándares y requisitos de servicio con el cliente",
-          "Diseñar la base de datos",
-          "Crear el logotipo de la empresa",
-          "Instalar un sistema operativo"
-        ],
-        respuesta: 0,
-        explicacion: "El SLA define los compromisos y calidad de servicio entre el desarrollador y el cliente."
-      }
-    ]
-  },
-  {
-    id: "btvds-3-3",
-    codigo: "BTVDS 3.3",
-    nombre: "Administración de bases de datos masivas y analítica de datos",
-    docente: "Arcides Canales",
-    resumen: "Consultas avanzadas en SQL Server (CRUD) y creación de dashboards interactivos en Power BI y Excel.",
-    programas: ["SQL Server Management Studio", "Power BI", "Microsoft Excel"],
-    herramientas: ["SQL", "Power Query", "Dashboards interactivos"],
-    instrumentos: ["Guía de consultas SQL", "Rúbrica de evaluación de Dashboards"],
-    recursos: [
-      { titulo: "Microsoft Learn - SQL Server", url: "https://learn.microsoft.com/es-es/sql/" },
-      { titulo: "Documentación de Power BI", url: "https://learn.microsoft.com/es-es/power-bi/" }
-    ],
-    evidencias: ["https://github.com/Adri401/Aby2611"],
-    quiz: [
-      {
-        pregunta: "¿Qué herramienta se utilizó para crear dashboards interactivos a partir de grandes volúmenes de datos?",
-        opciones: ["Power BI", "Duolingo", "Android Studio", "Git"],
-        respuesta: 0,
-        explicacion: "Power BI permite modelar y visualizar datos mediante reportes y dashboards dinámicos."
-      }
-    ]
-  },
-  {
-    id: "btvds-3-4",
-    codigo: "BTVDS 3.4",
-    nombre: "Desarrollo multiplataforma y sistemas ERP",
-    docente: "Arcides Canales",
-    resumen: "Desarrollo en Python, PHP, Avalonia y WPF para múltiples plataformas, y gestión modular con Odoo ERP.",
-    programas: ["Visual Studio", "VS Code", "Odoo ERP"],
-    herramientas: ["Python", "PHP", "Avalonia UI", "WPF"],
-    instrumentos: ["Guía de desarrollo multiplataforma", "Lista de cotejo módulos Odoo"],
-    recursos: [
-      { titulo: "Documentación de Python", url: "https://docs.python.org/es/3/" },
-      { titulo: "Odoo Documentation", url: "https://www.odoo.com/documentation" }
-    ],
-    evidencias: ["https://github.com/Adri401/Aby2611"],
-    quiz: [
-      {
-        pregunta: "¿Qué sistema ERP se utilizó para comprender el funcionamiento modular de las aplicaciones empresariales?",
-        opciones: ["Odoo", "SQL Server", "Flutter", "GitHub"],
-        respuesta: 0,
-        explicacion: "Odoo es una plataforma de software ERP basada en módulos de negocio integrados."
       }
     ]
   },
@@ -155,4 +83,109 @@ const modulosData = [
     evidencias: ["https://github.com/Adri401/Aby2611"],
     quiz: [
       {
-        pregunta: "¿Qué herramienta analiza Fort
+        pregunta: "¿Qué herramienta analiza Fortalezas, Oportunidades, Debilidades y Amenazas?",
+        opciones: ["Matriz FODA", "Diagrama de Gantt", "Wireframe", "UML"],
+        respuesta: 0,
+        explicacion: "La matriz FODA evalúa diagnósticos internos y externos."
+      }
+    ]
+  },
+
+  // --- MÓDULOS PROFESOR JAVIER MINEROS ---
+  {
+    id: "btvds-3-2",
+    codigo: "BTVDS 3.2",
+    nombre: "Acuerdos de Nivel de Servicio (SLA) y Gestión de Software",
+    docente: "Javier Mineros",
+    resumen: "Creación de documentos SLA para estándares de desarrollo y mejora del proyecto 'La esquina del sabor'.",
+    programas: ["Visual Studio Code", "Microsoft Word / Docs"],
+    herramientas: ["Plantilla SLA", "Requerimientos de Software"],
+    instrumentos: ["Documento SLA de proyecto", "Lista de cotejo de requisitos"],
+    recursos: [
+      { titulo: "Guía de Acuerdos de Nivel de Servicio (SLA)", url: "https://developer.mozilla.org/es/" }
+    ],
+    evidencias: ["https://github.com/Adri401/Aby2611"],
+    quiz: [
+      {
+        pregunta: "¿Para qué sirve un documento SLA en el desarrollo de software?",
+        opciones: [
+          "Para definir los estándares y requisitos del servicio contratado",
+          "Para escribir código de base de datos",
+          "Para diseñar logotipos",
+          "Para instalar sistemas operativos"
+        ],
+        respuesta: 0,
+        explicacion: "Un SLA establece los niveles de servicio y requisitos acordados con el cliente."
+      }
+    ]
+  },
+  {
+    id: "btvds-3-3",
+    codigo: "BTVDS 3.3",
+    nombre: "Bases de Datos Relacionales y Business Intelligence",
+    docente: "Javier Mineros",
+    resumen: "Consultas avanzadas en SQL Server (CRUD) y visualización de datos con Power BI y Excel.",
+    programas: ["SQL Server Management Studio", "Power BI", "Microsoft Excel"],
+    herramientas: ["Lenguaje SQL", "Dashboards Interactivos"],
+    instrumentos: ["Guía práctica de consultas SQL", "Rúbrica de Dashboard"],
+    recursos: [
+      { titulo: "Microsoft Learn - SQL Server", url: "https://learn.microsoft.com/es-es/sql/" },
+      { titulo: "Documentación Power BI", url: "https://learn.microsoft.com/es-es/power-bi/" }
+    ],
+    evidencias: ["https://github.com/Adri401/Aby2611"],
+    quiz: [
+      {
+        pregunta: "¿Qué herramienta se utilizó para crear dashboards interactivos desde la base de datos?",
+        opciones: ["Power BI y Excel", "Photoshop", "Duolingo", "Android Studio"],
+        respuesta: 0,
+        explicacion: "Power BI y Excel permiten analizar y visualizar datos masivos en tiempo real."
+      }
+    ]
+  },
+  {
+    id: "btvds-3-4",
+    codigo: "BTVDS 3.4",
+    nombre: "Desarrollo Multiplataforma y Sistemas ERP",
+    docente: "Javier Mineros",
+    resumen: "Desarrollo de apps multiplataforma (Python, PHP, Avalonia, WPF) e integración de módulos en Odoo ERP.",
+    programas: ["Visual Studio Code", "Odoo ERP", "Visual Studio"],
+    herramientas: ["Python", "PHP", "Avalonia UI", "WPF"],
+    instrumentos: ["Guía de desarrollo multiplataforma", "Evaluación ERP Odoo"],
+    recursos: [
+      { titulo: "Odoo Documentation", url: "https://www.odoo.com/documentation" },
+      { titulo: "Avalonia UI Docs", url: "https://docs.avaloniaui.net/" }
+    ],
+    evidencias: ["https://github.com/Adri401/Aby2611"],
+    quiz: [
+      {
+        pregunta: "¿Qué sistema ERP se analizó para comprender el funcionamiento de módulos empresariales?",
+        opciones: ["Odoo", "GitHub", "Power BI", "Duolingo"],
+        respuesta: 0,
+        explicacion: "Odoo es un sistema ERP modular para la gestión empresarial integrada."
+      }
+    ]
+  },
+  {
+    id: "btvds-3-8",
+    codigo: "BTVDS 3.8",
+    nombre: "Inteligencia Artificial Aplicada y Proyecto 'EstudIAnte'",
+    docente: "Javier Mineros",
+    resumen: "Creación de apps innovadoras con IA usando Google AI Studio y GitHub Copilot en VS Code.",
+    programas: ["Visual Studio Code", "Google AI Studio"],
+    herramientas: ["GitHub Copilot", "APIs de IA", "JavaScript"],
+    instrumentos: ["Rúbrica de innovación tecnológica", "Demostración de app en vivo"],
+    recursos: [
+      { titulo: "Google AI Studio Docs", url: "https://aistudio.google.com/" },
+      { titulo: "GitHub Copilot Features", url: "https://github.com/features/copilot" }
+    ],
+    evidencias: ["https://github.com/Adri401/Aby2611"],
+    quiz: [
+      {
+        pregunta: "¿Cómo se llama la aplicación de IA desarrollada en este módulo?",
+        opciones: ["EstudIAnte", "SLA Master", "Odoo App", "La Esquina del Sabor"],
+        respuesta: 0,
+        explicacion: "EstudIAnte fue la aplicación creada integrando conocimientos de IA."
+      }
+    ]
+  }
+];

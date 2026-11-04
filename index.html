@@ -14,13 +14,13 @@
   <header class="wrap">
     <span class="badge">INDEL · 3.º DS «B»</span>
     <h1>HUB DE REPASO ANUAL</h1>
-    <p class="lead">Portal interactivo de módulos académicos para el año escolar</p>
+    <p class="lead">Portal interactivo de módulos académicos · Profesores Javier Mineros y Arcides Canales</p>
 
     <!-- Barra de progreso -->
     <div class="progress-container">
       <div class="progress-info">
         <span>Progreso general de repaso</span>
-        <span id="progress-txt">0 de 4 repasados (0%)</span>
+        <span id="progress-txt">0 de 8 repasados (0%)</span>
       </div>
       <div class="progress-bar">
         <div id="progress-fill" class="progress-fill"></div>
@@ -29,9 +29,9 @@
   </header>
 
   <main class="wrap">
-    <!-- Buscador y filtro -->
+    <!-- Buscador y filtro por docente -->
     <div class="controls">
-      <input type="text" id="search-input" class="search-input" placeholder="Buscar módulo (ej. BTVDS 3.1, móviles, inglés)...">
+      <input type="text" id="search-input" class="search-input" placeholder="Buscar módulo (ej. BTVDS 3.3, Power BI, SLA, EstudIAnte)...">
       <select id="select-filter" class="select-filter">
         <option value="all">Todos los docentes</option>
         <option value="Javier Mineros">Javier Mineros</option>
@@ -39,7 +39,7 @@
       </select>
     </div>
 
-    <!-- Contenedor dinámico de 4 tarjetas -->
+    <!-- Contenedor dinámico de las 8 tarjetas -->
     <section id="contenedor-modulos" class="grid-cards"></section>
   </main>
 
