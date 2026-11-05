@@ -3,50 +3,217 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HUB 3DS·B · Repaso de Módulos</title>
+  <title>HUB 3DS·B · Portal de Repaso Académico</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-main: #f8fafc;
+      --surface: #ffffff;
+      --primary: #0284c7;
+      --primary-hover: #0369a1;
+      --primary-light: #e0f2fe;
+      --accent-arcides: #059669;
+      --accent-arcides-light: #d1fae5;
+      --accent-javier: #7c3aed;
+      --accent-javier-light: #ede9fe;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -1px rgba(0,0,0,0.04);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.03);
+      --radius: 12px;
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background-color: var(--bg-main); color: var(--text-main); font-family: var(--font-body); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* Header */
+    header { background: var(--surface); border-bottom: 1px solid var(--border-color); padding: 32px 0; }
+    .badge-school { display: inline-flex; align-items: center; gap: 6px; background: var(--primary-light); color: var(--primary); font-weight: 700; font-size: 0.85rem; padding: 4px 12px; border-radius: 999px; margin-bottom: 12px; }
+    h1 { font-family: var(--font-heading); font-size: 2.25rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.025em; }
+    .lead { color: var(--text-muted); font-size: 1.05rem; margin-top: 6px; }
+
+    /* Progress Section */
+    .progress-card { background: var(--surface); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 20px; margin-top: 24px; box-shadow: var(--shadow-sm); }
+    .progress-header { display: flex; justify-content: space-between; font-weight: 600; font-size: 0.95rem; margin-bottom: 8px; }
+    .progress-bar-bg { height: 12px; background: #f1f5f9; border-radius: 999px; overflow: hidden; border: 1px solid var(--border-color); }
+    .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), #38bdf8); transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+
+    /* Navigation Tabs */
+    .tabs-nav { display: flex; gap: 8px; margin: 28px 0 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 2px; }
+    .tab-btn { padding: 10px 20px; background: none; border: none; font-family: var(--font-body); font-weight: 600; font-size: 0.95rem; color: var(--text-muted); cursor: pointer; border-radius: 8px 8px 0 0; transition: all 0.2s; position: relative; }
+    .tab-btn:hover { color: var(--primary); }
+    .tab-btn.active { color: var(--primary); background: var(--surface); border-bottom: 2px solid var(--primary); margin-bottom: -4px; }
+
+    /* Controls */
+    .controls { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+    .search-input, .select-filter { background: var(--surface); border: 1px solid var(--border-color); color: var(--text-main); padding: 12px 16px; border-radius: var(--radius); font-family: var(--font-body); font-size: 0.95rem; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+    .search-input { flex: 1; min-width: 260px; }
+    .search-input:focus, .select-filter:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15); }
+
+    /* Cards Grid */
+    .grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+    .card { background: var(--surface); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm); transition: transform 0.2s, box-shadow 0.2s; }
+    .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .card-top { margin-bottom: 16px; }
+    .card-header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .card-code { font-family: var(--font-heading); font-size: 0.9rem; font-weight: 700; color: var(--primary); }
+    .badge-teacher { font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+    .badge-teacher.arcides { background: var(--accent-arcides-light); color: var(--accent-arcides); }
+    .badge-teacher.javier { background: var(--accent-javier-light); color: var(--accent-javier); }
+    .card-title { font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; margin-bottom: 8px; }
+    .card-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+    .card-actions { display: flex; gap: 10px; margin-top: 16px; }
+
+    /* Buttons */
+    .btn { flex: 1; padding: 10px 14px; border: 0; border-radius: 8px; font-family: var(--font-body); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: background-color 0.2s; text-align: center; }
+    .btn-primary { background: var(--primary); color: #ffffff; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-outline { background: var(--surface); border: 1px solid var(--border-color); color: var(--text-main); }
+    .btn-outline:hover { background: #f1f5f9; }
+    .btn-outline.completed { background: var(--accent-arcides-light); color: var(--accent-arcides); border-color: var(--accent-arcides); }
+
+    /* Flashcards Tab */
+    .flashcard-container { max-width: 600px; margin: 40px auto; perspective: 1000px; }
+    .flashcard { background: var(--surface); border: 2px solid var(--primary-light); border-radius: 16px; min-height: 280px; padding: 40px 30px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; cursor: pointer; box-shadow: var(--shadow-lg); transition: transform 0.4s; position: relative; }
+    .flashcard-module { font-weight: 700; font-size: 0.85rem; color: var(--primary); text-transform: uppercase; margin-bottom: 16px; }
+    .flashcard-text { font-size: 1.25rem; font-weight: 600; color: var(--text-main); }
+    .flashcard-hint { font-size: 0.8rem; color: var(--text-muted); position: absolute; bottom: 16px; }
+    .flashcard-nav { display: flex; justify-content: center; gap: 16px; margin-top: 20px; }
+
+    /* Quiz Tab */
+    .quiz-container { max-width: 750px; margin: 20px auto; background: var(--surface); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow-md); }
+    .quiz-question { font-size: 1.15rem; font-weight: 700; margin-bottom: 20px; }
+    .quiz-options { display: flex; flex-direction: column; gap: 12px; }
+    .quiz-option { padding: 14px 18px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--surface); font-weight: 500; cursor: pointer; text-align: left; transition: all 0.2s; font-family: var(--font-body); font-size: 0.95rem; }
+    .quiz-option:hover { border-color: var(--primary); background: var(--primary-light); }
+    .quiz-option.correct { background: var(--accent-arcides-light); border-color: var(--accent-arcides); color: var(--accent-arcides); font-weight: 700; }
+    .quiz-option.incorrect { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
+    .quiz-feedback { margin-top: 16px; padding: 12px 16px; border-radius: 8px; font-size: 0.9rem; display: none; }
+    .quiz-results { text-align: center; padding: 20px 0; }
+    .quiz-score { font-size: 3rem; font-weight: 800; font-family: var(--font-heading); color: var(--primary); margin: 12px 0; }
+
+    /* Modal */
+    dialog { margin: auto; padding: 32px; width: 90%; max-width: 650px; background: var(--surface); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 16px; box-shadow: var(--shadow-lg); }
+    dialog::backdrop { background: rgba(15, 23, 42, 0.4); backdrop-filter: blur(4px); }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 20px; }
+    .close-modal { background: none; border: 0; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; }
+    .modal-section { margin-top: 16px; }
+    .modal-section h4 { color: var(--primary); font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; }
+    .modal-section ul { padding-left: 20px; color: var(--text-muted); font-size: 0.95rem; }
+    .modal-section p { color: var(--text-muted); font-size: 0.95rem; }
+
+    footer { text-align: center; padding: 40px 0; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid var(--border-color); margin-top: 60px; }
+  </style>
 </head>
 <body>
 
-  <header class="wrap">
-    <span class="badge">INDEL · 3.º DS «B»</span>
-    <h1>HUB DE REPASO ANUAL</h1>
-    <p class="lead">Portal interactivo de módulos académicos · Profesores Javier Mineros y Arcides Canales</p>
+  <header>
+    <div class="wrap">
+      <div class="badge-school">INDEL · 3.º DS «B»</div>
+      <h1>HUB DE REPASO ACADÉMICO</h1>
+      <p class="lead">Plataforma interactiva de repaso técnico para Desarrollo de Software</p>
 
-    <!-- Barra de progreso -->
-    <div class="progress-container">
-      <div class="progress-info">
-        <span>Progreso general de repaso</span>
-        <span id="progress-txt">0 de 8 repasados (0%)</span>
-      </div>
-      <div class="progress-bar">
-        <div id="progress-fill" class="progress-fill"></div>
+      <div class="progress-card">
+        <div class="progress-header">
+          <span>Progreso General de Módulos Completados</span>
+          <span id="progress-txt">0 de 8 completados (0%)</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div id="progress-fill" class="progress-bar-fill"></div>
+        </div>
       </div>
     </div>
   </header>
 
   <main class="wrap">
-    <!-- Buscador y filtro por docente -->
-    <div class="controls">
-      <input type="text" id="search-input" class="search-input" placeholder="Buscar módulo (ej. BTVDS 3.3, Power BI, SLA, EstudIAnte)...">
-      <select id="select-filter" class="select-filter">
-        <option value="all">Todos los docentes</option>
-        <option value="Javier Mineros">Javier Mineros</option>
-        <option value="Arcides Canales">Arcides Canales</option>
-      </select>
+    <nav class="tabs-nav">
+      <button class="tab-btn active" onclick="switchTab('modulos', event)">Módulos</button>
+      <button class="tab-btn" onclick="switchTab('flashcards', event)">Flashcards</button>
+      <button class="tab-btn" onclick="switchTab('quiz', event)">Simulador de Quiz (10 Preguntas)</button>
+    </nav>
+
+    <!-- TAB 1: MODULOS -->
+    <div id="tab-modulos">
+      <div class="controls">
+        <input type="text" id="search-input" class="search-input" placeholder="Buscar módulo (ej. BTVDS 3.1, Power BI, SLA, EstudIAnte)...">
+        <select id="select-filter" class="select-filter">
+          <option value="all">Todos los docentes</option>
+          <option value="Arcides Canales">Arcides Canales</option>
+          <option value="Javier Mineros">Javier Mineros</option>
+        </select>
+      </div>
+
+      <section id="contenedor-modulos" class="grid-cards"></section>
     </div>
 
-    <!-- Contenedor dinámico de las 8 tarjetas -->
-    <section id="contenedor-modulos" class="grid-cards"></section>
+    <!-- TAB 2: FLASHCARDS -->
+    <div id="tab-flashcards" style="display: none;">
+      <div class="flashcard-container">
+        <div class="flashcard" id="flashcard" onclick="flipCard()">
+          <div class="flashcard-module" id="card-module">BTVDS 3.1</div>
+          <div class="flashcard-text" id="card-text">Haga clic para iniciar el repaso</div>
+          <div class="flashcard-hint" id="card-hint">Toca para revelar la respuesta</div>
+        </div>
+        <div class="flashcard-nav">
+          <button class="btn btn-outline" onclick="prevCard()">Anterior</button>
+          <button class="btn btn-primary" onclick="nextCard()">Siguiente</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: QUIZ POR MÓDULO -->
+    <div id="tab-quiz" style="display: none;">
+      <div class="quiz-container">
+        <div style="margin-bottom: 20px;">
+          <label style="font-weight: 700; display: block; margin-bottom: 8px;">Selecciona el Módulo a Evaluar:</label>
+          <select id="quiz-module-select" class="select-filter" style="width: 100%;" onchange="initQuizForModule()">
+            <!-- Llenado dinámico -->
+          </select>
+        </div>
+
+        <div id="quiz-screen-start">
+          <div style="text-align: center; padding: 20px 0;">
+            <h3 id="quiz-start-title" style="font-family: var(--font-heading); font-size: 1.3rem;">Evaluación Individual</h3>
+            <p style="color: var(--text-muted); margin: 10px 0 20px;">Este examen consta de 10 preguntas con opciones desordenadas aleatoriamente. Si tu nota final es mayor o igual a 8.0/10, el módulo se marcará como <strong>COMPLETADO</strong> automáticamente.</p>
+            <button class="btn btn-primary" style="max-width: 200px; margin: 0 auto;" onclick="startQuiz()">Iniciar Evaluación</button>
+          </div>
+        </div>
+
+        <div id="quiz-screen-questions" style="display: none;">
+          <div style="display: flex; justify-content: space-between; font-weight:700; color:var(--primary); margin-bottom:12px;">
+            <span id="quiz-mod-title">Módulo</span>
+            <span id="quiz-step-counter">Pregunta 1 de 10</span>
+          </div>
+          <div class="quiz-question" id="quiz-question">Cargando pregunta...</div>
+          <div class="quiz-options" id="quiz-options"></div>
+          <div class="quiz-feedback" id="quiz-feedback"></div>
+          <div style="margin-top: 24px; text-align: right;">
+            <button class="btn btn-primary" id="btn-quiz-next" onclick="nextQuizQuestion()" style="max-width: 160px; display: none;">Siguiente</button>
+          </div>
+        </div>
+
+        <div id="quiz-screen-results" class="quiz-results" style="display: none;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.5rem;">Resultado de la Evaluación</h3>
+          <div class="quiz-score" id="quiz-score-val">0.0</div>
+          <p id="quiz-score-msg" style="font-weight: 600; margin-bottom: 20px;"></p>
+          <button class="btn btn-primary" style="max-width: 220px; margin: 0 auto;" onclick="initQuizForModule()">Intentar Nuevamente</button>
+        </div>
+
+      </div>
+    </div>
   </main>
 
-  <!-- Modal Ficha -->
   <dialog id="modal-ficha">
     <div class="modal-header">
-      <span style="font-family:var(--font-fd); font-size:0.85rem; color:var(--text-mut);">FICHA TÉCNICA</span>
+      <span style="font-family:var(--font-heading); font-size:0.85rem; font-weight:700; color:var(--text-muted);">FICHA TÉCNICA DE MÓDULO</span>
       <button id="close-modal" class="close-modal">&times;</button>
     </div>
     <div id="modal-body"></div>
@@ -54,11 +221,498 @@
 
   <footer>
     <div class="wrap">
-      <p>Diseñado para el 3.º Bachillerato Técnico Vocacional en Desarrollo de Software «B»</p>
+      <p>3.º Bachillerato Técnico Vocacional en Desarrollo de Software «B» · INDEL</p>
     </div>
   </footer>
 
-  <script src="data/modulos.js"></script>
-  <script src="js/app.js"></script>
+  <script>
+    const modulosData = [
+      {
+        id: "btvds-3-1",
+        codigo: "BTVDS 3.1",
+        nombre: "Desarrollo de aplicaciones de software para la solución de problemas",
+        docente: "Arcides Canales",
+        resumen: "Diseño, lógica e implementación de soluciones de software estructuradas y orientadas a objetos.",
+        programas: ["Visual Studio Code", "Git", "Google Chrome"],
+        herramientas: ["HTML5", "CSS3", "JavaScript", "GitHub"],
+        instrumentos: ["Rúbrica de evaluación", "Guía de desarrollo N° 1"],
+        recursos: [
+          { titulo: "MDN Web Docs - HTML & JS", url: "https://developer.mozilla.org/es/" },
+          { titulo: "Pro Git Book", url: "https://git-scm.com/book/es/v2" }
+        ],
+        quizQuestions: [
+          { q: "¿Qué sistema de control de versiones distribuido permite rastrear cambios en el código?", opts: ["Git", "MySQL", "VS Code", "HTML"], ans: "Git", exp: "Git es el sistema estándar para gestión de versiones de código." },
+          { q: "¿Qué etiqueta HTML5 define la navegación principal del sitio web?", opts: ["<nav>", "<header>", "<section>", "<aside>"], ans: "<nav>", exp: "<nav> es la etiqueta semántica apropiada para los enlaces de navegación." },
+          { q: "¿Qué propiedad CSS se utiliza para cambiar el color del texto?", opts: ["color", "font-color", "text-style", "background-color"], ans: "color", exp: "La propiedad 'color' define el tono del texto en CSS." },
+          { q: "¿Cuál es el comando Git utilizado para subir commits locales al repositorio remoto?", opts: ["git push", "git pull", "git commit", "git clone"], ans: "git push", exp: "git push envía las actualizaciones locales hacia GitHub." },
+          { q: "¿Qué método de JavaScript agrega un nuevo elemento al final de un arreglo?", opts: ["push()", "pop()", "shift()", "unshift()"], ans: "push()", exp: "push() añade uno o más elementos al extremo final de un array." },
+          { q: "¿Qué significa que JavaScript sea un lenguaje no tipado o de tipado débil?", opts: ["Las variables no requieren especificar el tipo de dato al declararse", "No permite utilizar números ni texto", "Solo se ejecuta en servidores", "Requiere compilación previa en binario"], ans: "Las variables no requieren especificar el tipo de dato al declararse", exp: "Las variables en JS adoptan el tipo dinámicamente según el valor asignado." },
+          { q: "¿Qué estructura condicional evalúa múltiples casos según una expresión en JS?", opts: ["switch", "while", "for", "do while"], ans: "switch", exp: "switch evalúa una expresión comparándola con varios 'case'." },
+          { q: "¿Qué evento de JavaScript detecta cuando el usuario hace clic en un elemento?", opts: ["click", "hover", "change", "load"], ans: "click", exp: "El evento 'click' se activa cuando se presiona el puntero sobre un elemento." },
+          { q: "¿Qué método convierte un objeto JavaScript en una cadena de texto JSON?", opts: ["JSON.stringify()", "JSON.parse()", "Object.toString()", "String.toJSON()"], ans: "JSON.stringify()", exp: "JSON.stringify() transforma datos de JS en formato de texto JSON." },
+          { q: "¿Para qué sirve el comando 'git status' en la terminal?", opts: ["Para ver el estado actual de los archivos rastreados y pendientes", "Para crear una rama nueva", "Para borrar el historial", "Para clonar un repositorio"], ans: "Para ver el estado actual de los archivos rastreados y pendientes", exp: "git status muestra qué cambios han sido preparados o están modificados." }
+        ]
+      },
+      {
+        id: "btvds-3-5",
+        codigo: "BTVDS 3.5",
+        nombre: "Desarrollo de componentes para dispositivos móviles",
+        docente: "Arcides Canales",
+        resumen: "Diseño de interfaces adaptables, componentes móviles e integración de aplicaciones progresivas (PWA).",
+        programas: ["Android Studio", "VS Code", "Navegador Web"],
+        herramientas: ["PWA", "CSS Responsive", "JavaScript", "Flutter"],
+        instrumentos: ["Rúbrica de interfaz UI/UX", "Lista de cotejo móvil"],
+        recursos: [
+          { titulo: "Google Web Dev - PWA", url: "https://web.dev/explore/progressive-web-apps" }
+        ],
+        quizQuestions: [
+          { q: "¿Qué significan las siglas PWA en el desarrollo de software?", opts: ["Progressive Web App", "Public Web Access", "Programmed Web Agent", "Private Wireless Application"], ans: "Progressive Web App", exp: "PWA combina características de la web con capacidades nativas móviles." },
+          { q: "¿Qué directiva de CSS se utiliza para crear diseños adaptables según el tamaño de pantalla?", opts: ["@media", "@import", "@font-face", "@keyframes"], ans: "@media", exp: "Las media queries aplican estilos según la resolución o tipo de dispositivo." },
+          { q: "¿Qué archivo manifest.json define en una PWA?", opts: ["Los metadatos, iconos y nombre para la instalación de la app", "Las consultas a la base de datos", "El código fuente en JavaScript", "Los estilos de animación"], ans: "Los metadatos, iconos y nombre para la instalación de la app", exp: "manifest.json proporciona la configuración de instalación de la PWA." },
+          { q: "¿Qué tecnología en background permite a las PWA funcionar sin conexión a internet?", opts: ["Service Workers", "WebSockets", "PHP", "AJAX"], ans: "Service Workers", exp: "Los Service Workers interceptan peticiones y gestionan la caché local." },
+          { q: "¿Qué unidad de medida en CSS se basa en el ancho de la pantalla del dispositivo?", opts: ["vw", "px", "cm", "pt"], ans: "vw", exp: "1vw equivale al 1% del ancho de la ventana de visualización (viewport width)." },
+          { q: "¿Qué framework de Google utiliza el lenguaje Dart para desarrollo móvil multiplataforma?", opts: ["Flutter", "React Native", "Ionic", "Angular"], ans: "Flutter", exp: "Flutter permite compilar apps nativas desde una sola base de código con Dart." },
+          { q: "¿Cuál es el objetivo principal del diseño Responsive UI?", opts: ["Que la interfaz se ajuste fluidamente a cualquier pantalla", "Aumentar la velocidad de internet", "Ocultar todas las imágenes en celulares", "Evitar el uso de CSS"], ans: "Que la interfaz se ajuste fluidamente a cualquier pantalla", exp: "Responsive UI asegura usabilidad óptima en teléfonos, tablets y computadoras." },
+          { q: "¿Qué etiqueta HTML asegura que la pantalla en móviles no se renderice encogida?", opts: ["<meta name='viewport' content='width=device-width, initial-scale=1.0'>", "<meta charset='UTF-8'>", "<link rel='stylesheet'>", "<title>Mobile</title>"], ans: "<meta name='viewport' content='width=device-width, initial-scale=1.0'>", exp: "El meta viewport configura la escala y ancho correcto en navegadores móviles." },
+          { q: "¿Qué evento táctil en navegadores móviles equivale al clic del mouse?", opts: ["touchstart", "keypress", "scroll", "resize"], ans: "touchstart", exp: "touchstart se desencadena cuando un dedo toca la pantalla táctil." },
+          { q: "¿Qué herramienta del navegador permite simular resoluciones de dispositivos móviles?", opts: ["DevTools / Módulo de inspección móvil (F12)", "Lighthouse público", "Terminal de Git", "Visual Studio Code"], ans: "DevTools / Módulo de inspección móvil (F12)", exp: "Las DevTools incluyen emulación de pantallas para probar diseños adaptables." }
+        ]
+      },
+      {
+        id: "btvds-3-6",
+        codigo: "BTVDS 3.6",
+        nombre: "Conversación de inglés sobre mantenimiento de sistemas informáticos",
+        docente: "Arcides Canales",
+        resumen: "Comprensión lectora, vocabulario técnico en inglés y comunicación oral para soporte técnico.",
+        programas: ["Duolingo", "Google Translate"],
+        herramientas: ["Technical English Glossary", "Grammar Guide"],
+        instrumentos: ["Rúbrica de Speaking", "Guía de traducción"],
+        recursos: [
+          { titulo: "BBC Learning English", url: "https://www.bbc.co.uk/learningenglish/" }
+        ],
+        quizQuestions: [
+          { q: "How do you say 'mantenimiento preventivo' in technical English?", opts: ["Preventive maintenance", "Software crash", "System failure", "Data loss"], ans: "Preventive maintenance", exp: "'Preventive maintenance' is the correct technical term." },
+          { q: "What does the IT abbreviation 'RAM' stand for?", opts: ["Random Access Memory", "Read Access Module", "Rapid Action Mode", "Remote Application Manager"], ans: "Random Access Memory", exp: "RAM stands for Random Access Memory." },
+          { q: "Which term describes the process of finding and fixing errors in software?", opts: ["Troubleshooting", "Networking", "Browsing", "Downloading"], ans: "Troubleshooting", exp: "'Troubleshooting' means diagnosing and resolving technical issues." },
+          { q: "How do you translate 'copia de seguridad' into English?", opts: ["Backup", "Restore", "Delete", "Format"], ans: "Backup", exp: "A 'backup' is a duplicate copy of data stored for safety." },
+          { q: "What is the English word for 'placa base' or 'tarjeta madre'?", opts: ["Motherboard", "Hard drive", "Power supply", "Keyboard"], ans: "Motherboard", exp: "The 'motherboard' is the main printed circuit board in a computer." },
+          { q: "Complete the sentence: 'You should _____ your antivirus software regularly.'", opts: ["update", "erase", "break", "unplug"], ans: "update", exp: "'Update' means install the latest definition files and features." },
+          { q: "What does the term 'Hardware' refer to?", opts: ["Physical components of a computer system", "Programs and applications", "Web browsers", "Internet protocols"], ans: "Physical components of a computer system", exp: "Hardware includes tangible parts like CPU, memory, and monitor." },
+          { q: "What is the correct English term for 'almacenamiento en la nube'?", opts: ["Cloud storage", "Local drive", "Flash memory", "Optical disk"], ans: "Cloud storage", exp: "'Cloud storage' refers to saving data on remote internet servers." },
+          { q: "Choose the correct phrase: 'My computer froze, I need to _____ it.'", opts: ["reboot", "paint", "sell", "type"], ans: "reboot", exp: "'Reboot' or 'restart' means turning the computer off and on again." },
+          { q: "What does 'Operating System' mean in Spanish?", opts: ["Sistema Operativo", "Código de Red", "Mantenimiento Técnico", "Procesador Central"], ans: "Sistema Operativo", exp: "Operating System (OS) translates directly as Sistema Operativo." }
+        ]
+      },
+      {
+        id: "btvds-3-7",
+        codigo: "BTVDS 3.7",
+        nombre: "Puesta en marcha de la microempresa en asociatividad cooperativa",
+        docente: "Arcides Canales",
+        resumen: "Modelado de negocios Canvas, análisis presupuestario y organización asociativa.",
+        programas: ["Microsoft Excel", "Google Sheets", "Canva"],
+        herramientas: ["Modelo Canvas", "Matriz FODA"],
+        instrumentos: ["Rúbrica de plan de negocios", "Estudio de mercado"],
+        recursos: [
+          { titulo: "Business Model Canvas", url: "https://www.strategyzer.com/canvas/business-model-canvas" }
+        ],
+        quizQuestions: [
+          { q: "¿Qué matriz estratégica analiza Fortalezas, Oportunidades, Debilidades y Amenazas?", opts: ["Matriz FODA", "Diagrama de Gantt", "Modelo Canvas", "Flujo de Caja"], ans: "Matriz FODA", exp: "La matriz FODA evalúa el diagnóstico interno y externo de la empresa." },
+          { q: "¿Cuántos bloques principales componen la plantilla del Modelo Canvas?", opts: ["9", "5", "12", "7"], ans: "9", exp: "El Modelo Canvas de Alexander Osterwalder está estructurado en 9 bloques clave." },
+          { q: "¿Qué bloque del Canvas define qué necesidad se resuelve para el cliente?", opts: ["Propuesta de Valor", "Canales de Distribución", "Estructura de Costos", "Socios Clave"], ans: "Propuesta de Valor", exp: "La propuesta de valor es el factor diferenciador que resuelve el problema del cliente." },
+          { q: "¿Qué representa el Flujo de Caja en la gestión financiera de una microempresa?", opts: ["El registro de ingresos y egresos de efectivo en un período", "El inventario de productos terminados", "El cálculo de impuestos a pagar", "La cantidad de clientes registrados"], ans: "El registro de ingresos y egresos de efectivo en un período", exp: "El flujo de caja controla el dinero real que entra y sale del negocio." },
+          { q: "¿Qué caracteriza a una microempresa basada en asociatividad cooperativa?", opts: ["La propiedad compartida y la toma de decisiones democrática", "Tener un solo dueño único e indiscutible", "Funcionar sin necesidad de ingresos", "No requerir registro legal ni tributario"], ans: "La propiedad compartida y la toma de decisiones democrática", exp: "La asociatividad cooperativa busca el beneficio común de sus integrantes." },
+          { q: "¿Qué es el Costo Fijo en un presupuesto de producción?", opts: ["Aquel costo que se mantiene constante independientemente de la cantidad producida", "El precio de venta al público", "El costo del material que cambia cada día", "La ganancia neta del proyecto"], ans: "Aquel costo que se mantiene constante independientemente de la cantidad producida", exp: "Los costos fijos (ej. alquiler) no varían según el volumen de producción." },
+          { q: "¿Qué estudio analiza la demanda, oferta y precios de la competencia?", opts: ["Estudio de Mercado", "Código de Ética", "Plan de Mantenimiento", "Diagrama UML"], ans: "Estudio de Mercado", exp: "El estudio de mercado evalúa la factibilidad comercial del producto." },
+          { q: "¿Qué es el Punto de Equilibrio en finanzas?", opts: ["El nivel de ventas donde los ingresos igualan exactamente a los costos totales", "El momento en que se pagan todos los impuestos", "El precio más alto del mercado", "La ganancia máxima posible"], ans: "El nivel de ventas donde los ingresos igualan exactamente a los costos totales", exp: "En el punto de equilibrio no hay ni pérdidas ni ganancias." },
+          { q: "¿Qué segmento define en el Canvas a las personas a quienes va dirigido el producto?", opts: ["Segmento de Clientes", "Flujo de Ingresos", "Recursos Clave", "Actividades Clave"], ans: "Segmento de Clientes", exp: "Segmento de clientes especifica el público objetivo del negocio." },
+          { q: "¿Cuál es una ventaja principal de formalizar legalmente una microempresa?", opts: ["Acceso a financiamiento bancario y nuevos mercados", "No volver a llevar contabilidad", "Garantía de ventas ilimitadas", "Eliminar los costos de producción"], ans: "Acceso a financiamiento bancario y nuevos mercados", exp: "La formalización otorga personería jurídica y respalda el crecimiento del negocio." }
+        ]
+      },
+      {
+        id: "btvds-3-2",
+        codigo: "BTVDS 3.2",
+        nombre: "Acuerdos de Nivel de Servicio (SLA) y Gestión de Software",
+        docente: "Javier Mineros",
+        resumen: "Diseño de documentos SLA para estándares de cliente y mejora del sistema 'La esquina del sabor'.",
+        programas: ["Visual Studio Code", "Microsoft Word"],
+        herramientas: ["Plantilla SLA", "Requerimientos de Software"],
+        instrumentos: ["Documento SLA de proyecto", "Lista de cotejo de requisitos"],
+        recursos: [
+          { titulo: "Estándares SLA de Software", url: "https://developer.mozilla.org/es/" }
+        ],
+        quizQuestions: [
+          { q: "¿Qué significan las siglas SLA en la ingeniería de software?", opts: ["Service Level Agreement", "Software Logic Application", "System Local Access", "Standard Language Architecture"], ans: "Service Level Agreement", exp: "SLA es el Acuerdo de Nivel de Servicio entre cliente y proveedor." },
+          { q: "¿Cuál es el propósito principal de formalizar un documento SLA?", opts: ["Garantizar métricas mínimas de rendimiento, disponibilidad y entrega del servicio", "Escribir código en bases de datos relacionales", "Diseñar logotipos vectoriales", "Comprar hardware de computadoras"], ans: "Garantizar métricas mínimas de rendimiento, disponibilidad y entrega del servicio", exp: "El SLA compromete legal y técnicamente los estándares de servicio." },
+          { q: "¿Qué métrica del SLA mide el porcentaje de tiempo que el sistema está disponible?", opts: ["Uptime / Disponibilidad", "Latencia de red", "Costo por click", "Líneas de código"], ans: "Uptime / Disponibilidad", exp: "El Uptime (ej. 99.9%) mide el tiempo continuo en línea de la aplicación." },
+          { q: "¿Qué proyecto del restaurante se mejoró con base en la Plantilla SLA en este módulo?", opts: ["La esquina del sabor", "EstudIAnte", "Odoo ERP", "PWA Mobile"], ans: "La esquina del sabor", exp: "Se implementaron requerimientos del SLA en el sistema del restaurante." },
+          { q: "¿Qué es un Requisito No Funcional en la especificación de un sistema?", opts: ["Una cualidad del sistema como seguridad, rendimiento o disponibilidad", "Un botón para guardar datos", "Un reporte impreso en PDF", "La base de datos en SQL"], ans: "Una cualidad del sistema como seguridad, rendimiento o disponibilidad", exp: "Los no funcionales determinan CÓMO debe operar el sistema en calidad." },
+          { q: "¿Qué cláusula del SLA establece el tiempo límite para corregir un fallo crítico?", opts: ["Tiempo de Respuesta y Solución (RTO/MTTR)", "Estructura de Costos", "Licencia GPL", "Derechos de Autor"], ans: "Tiempo de Respuesta y Solución (RTO/MTTR)", exp: "Define cuántas horas máximas tiene el desarrollador para solucionar caídas." },
+          { q: "¿Qué representa una penalización en un contrato SLA de desarrollo?", opts: ["Una compensación económica al cliente si no se cumple el nivel acordado", "La cancelación de las licencias de software", "Un reinicio del servidor", "Un aumento de salario al programador"], ans: "Una compensación económica al cliente si no se cumple el nivel acordado", exp: "Las penalizaciones garantizan que el desarrollador cumpla sus compromisos." },
+          { q: "¿Qué es la Latencia en los servicios web especificados en un SLA?", opts: ["El tiempo de retardo en responder una petición", "La cantidad de memoria RAM utilizada", "El tamaño del disco duro", "El número de líneas CSS"], ans: "El tiempo de retardo en responder una petición", exp: "La latencia mide en milisegundos cuánto tarda la respuesta del servidor." },
+          { q: "¿Quiénes deben firmar y acordar los términos estipulados en un SLA?", opts: ["El cliente y el proveedor de desarrollo", "Únicamente el programador junior", "Los usuarios finales desconocidos", "El fabricante de la computadora"], ans: "El cliente y el proveedor de desarrollo", exp: "Es un acuerdo mutuo vinculante entre el prestador y el cliente." },
+          { q: "¿Qué herramienta se utiliza para monitorear el cumplimiento de un SLA en servidores?", opts: ["Herramientas de Monitoreo de Rendimiento (APM/Uptime)", "Duolingo", "Canva", "Git Bash"], ans: "Herramientas de Monitoreo de Rendimiento (APM/Uptime)", exp: "Permiten verificar con datos si se cumple el porcentaje de disponibilidad." }
+        ]
+      },
+      {
+        id: "btvds-3-3",
+        codigo: "BTVDS 3.3",
+        nombre: "Bases de Datos Relacionales y Business Intelligence",
+        docente: "Javier Mineros",
+        resumen: "Consultas SQL avanzadas en SQL Server y generación de dashboards dinámicos con Power BI y Excel.",
+        programas: ["SQL Server Management Studio", "Power BI", "Excel"],
+        herramientas: ["Lenguaje SQL", "Dashboards Interactivos"],
+        instrumentos: ["Guía de consultas SQL", "Rúbrica de Dashboard"],
+        recursos: [
+          { titulo: "Microsoft Learn - SQL Server", url: "https://learn.microsoft.com/es-es/sql/" }
+        ],
+        quizQuestions: [
+          { q: "¿Qué comando SQL se utiliza para recuperar y consultar registros de una base de datos?", opts: ["SELECT", "INSERT", "UPDATE", "DELETE"], ans: "SELECT", exp: "SELECT extrae datos de una o más tablas relacionales." },
+          { q: "¿Qué cláusula de SQL permite filtrar filas según una condición específica?", opts: ["WHERE", "GROUP BY", "ORDER BY", "HAVING"], ans: "WHERE", exp: "WHERE aplica criterios de filtrado a las filas seleccionadas." },
+          { q: "¿Qué herramienta de Microsoft se utilizó para construir dashboards interactivos de Business Intelligence?", opts: ["Power BI", "Duolingo", "Android Studio", "Word"], ans: "Power BI", exp: "Power BI permite transformar datos en paneles visuales analíticos." },
+          { q: "¿Qué tipo de relación une dos tablas en SQL mediante claves primarias y foráneas?", opts: ["Relación Relacional (1:N, N:M)", "Array dinámico", "Script JS", "Conexión CSS"], ans: "Relación Relacional (1:N, N:M)", exp: "Las llaves primarias y foráneas establecen la integridad referencial entre tablas." },
+          { q: "¿Qué comando SQL se usa para modificar registros ya existentes en una tabla?", opts: ["UPDATE", "ALTER", "MODIFY", "CHANGE"], ans: "UPDATE", exp: "UPDATE actualiza los valores de columnas en filas existentes." },
+          { q: "¿Qué operador SQL combina filas de dos o más tablas basándose en una columna relacionada?", opts: ["JOIN", "UNION", "MERGE", "GROUP"], ans: "JOIN", exp: "INNER JOIN u otros tipos de JOIN combinan información de múltiples tablas." },
+          { q: "¿Qué comando SQL elimina una tabla completa junto con su estructura y datos?", opts: ["DROP TABLE", "DELETE TABLE", "REMOVE TABLE", "CLEAR TABLE"], ans: "DROP TABLE", exp: "DROP TABLE borra permanentemente el objeto de la base de datos." },
+          { q: "¿Qué función de agregación en SQL calcula el promedio de un campo numérico?", opts: ["AVG()", "SUM()", "COUNT()", "MAX()"], ans: "AVG()", exp: "AVG() (Average) obtiene la media aritmética de una columna." },
+          { q: "¿Qué es una Clave Primaria (Primary Key) en una tabla de SQL Server?", opts: ["Un campo que identifica de forma única cada registro de la tabla", "Una contraseña de acceso al servidor", "El nombre de la base de datos", "Una columna para guardar imágenes"], ans: "Un campo que identifica de forma única cada registro de la tabla", exp: "La Primary Key garantiza valores únicos no nulos para cada fila." },
+          { q: "¿Qué lenguaje de consultas se utiliza en SQL Server?", opts: ["T-SQL (Transact-SQL)", "PL/SQL", "JavaScript", "Python"], ans: "T-SQL (Transact-SQL)", exp: "T-SQL es la extensión de SQL propia de Microsoft para SQL Server." }
+        ]
+      },
+      {
+        id: "btvds-3-4",
+        codigo: "BTVDS 3.4",
+        nombre: "Desarrollo Multiplataforma y Sistemas ERP",
+        docente: "Javier Mineros",
+        resumen: "Desarrollo de aplicaciones con Python, PHP, Avalonia y WPF, e integración modular en Odoo ERP.",
+        programas: ["VS Code", "Odoo ERP", "Visual Studio"],
+        herramientas: ["Python", "PHP", "Avalonia UI", "WPF"],
+        instrumentos: ["Guía multiplataforma", "Evaluación ERP Odoo"],
+        recursos: [
+          { titulo: "Odoo ERP Documentation", url: "https://www.odoo.com/documentation" }
+        ],
+        quizQuestions: [
+          { q: "¿Qué significan las siglas ERP en el ámbito de software empresarial?", opts: ["Enterprise Resource Planning", "External Remote Protocol", "Efficient Rapid Programming", "Electronic Report Process"], ans: "Enterprise Resource Planning", exp: "ERP (Planificación de Recursos Empresariales) gestiona procesos de negocios." },
+          { q: "¿Qué plataforma ERP modular de código abierto se estudió en este módulo?", opts: ["Odoo", "Power BI", "SQL Server", "Flutter"], ans: "Odoo", exp: "Odoo es una suite ERP con módulos de ventas, inventario, contabilidad y más." },
+          { q: "¿Qué framework basado en XAML y C# permite desarrollar interfaces de escritorio multiplataforma?", opts: ["Avalonia UI", "Duolingo", "Bootstrap", "Android SDK"], ans: "Avalonia UI", exp: "Avalonia UI ejecuta aplicaciones GUI en Windows, Linux y macOS." },
+          { q: "¿En qué lenguaje de programación está desarrollada la arquitectura backend de Odoo?", opts: ["Python", "C#", "Java", "PHP"], ans: "Python", exp: "El núcleo y módulos de Odoo se programan principalmente en Python." },
+          { q: "¿Qué tecnología de Microsoft permite crear interfaces de escritorio usando XAML en Windows?", opts: ["WPF (Windows Presentation Foundation)", "PWA", "HTML5", "Flutter"], ans: "WPF (Windows Presentation Foundation)", exp: "WPF es el motor de UI para desarrollo de escritorio en .NET." },
+          { q: "¿Cuál es una ventaja principal de un software multiplataforma?", opts: ["Permite ejecutar el código en diferentes sistemas operativos con pocos cambios", "Solo funciona en computadoras viejas", "No requiere lenguaje de programación", "Aumenta los costos de producción"], ans: "Permite ejecutar el código en diferentes sistemas operativos con pocos cambios", exp: "Multiplataforma asegura alcance en Windows, Linux, macOS y dispositivos." },
+          { q: "¿Qué lenguaje del lado del servidor es ampliamente utilizado en desarrollo web dinámico tradicional?", opts: ["PHP", "CSS", "SQL", "HTML"], ans: "PHP", exp: "PHP procesa lógica web en el servidor generando HTML hacia el cliente." },
+          { q: "¿Cómo se comunican los diferentes módulos en un sistema ERP unificado?", opts: ["A través de una base de datos centralizada e integrada", "Enviándose correos manuales", "Imprimiendo documentos en papel", "Sin ninguna conexión entre ellos"], ans: "A través de una base de datos centralizada e integrada", exp: "La base de datos centralizada asegura consistencia entre inventario, ventas y caja." },
+          { q: "¿Qué es XAML en entornos de desarrollo .NET y Avalonia?", opts: ["Un lenguaje de marcado declarativo para diseñar la interfaz de usuario", "El motor de base de datos", "Un antivirus", "Un protocolo de red"], ans: "Un lenguaje de marcado declarativo para diseñar la interfaz de usuario", exp: "XAML define la estructura de botones, textos y ventanas en la interfaz." },
+          { q: "¿Qué ventaja ofrece la arquitectura modular de Odoo a una empresa?", opts: ["Instalar solo las aplicaciones necesarias y escalar gradualmente", "Eliminar la necesidad de usar internet", "Impedir que trabajen varios usuarios", "Obligar a comprar hardware caro"], ans: "Instalar solo las aplicaciones necesarias y escalar gradualmente", exp: "Se activan módulos (ej. Ventas, Inventario) a medida que el negocio lo requiera." }
+        ]
+      },
+      {
+        id: "btvds-3-8",
+        codigo: "BTVDS 3.8",
+        nombre: "Inteligencia Artificial Aplicada y Proyecto 'EstudIAnte'",
+        docente: "Javier Mineros",
+        resumen: "Desarrollo de soluciones con Inteligencia Artificial mediante Google AI Studio y GitHub Copilot.",
+        programas: ["Visual Studio Code", "Google AI Studio"],
+        herramientas: ["GitHub Copilot", "APIs de IA", "JavaScript"],
+        instrumentos: ["Rúbrica de innovación tecnológica", "Demostración en vivo"],
+        recursos: [
+          { titulo: "Google AI Studio Platform", url: "https://aistudio.google.com/" }
+        ],
+        quizQuestions: [
+          { q: "¿Cómo se llama la aplicación educativa innovadora desarrollada en este módulo?", opts: ["EstudIAnte", "SLA Master", "Odoo Hub", "La Esquina del Sabor"], ans: "EstudIAnte", exp: "EstudIAnte es el proyecto integrador desarrollado con capacidades de IA." },
+          { q: "¿Qué entorno de Google se utilizó para probar prompts y obtener claves API de modelos LLM?", opts: ["Google AI Studio", "Android Studio", "Duolingo", "Power BI"], ans: "Google AI Studio", exp: "Google AI Studio permite prototipar aplicaciones con la API de Gemini." },
+          { q: "¿Qué asistente de IA integrado en VS Code ayuda a los programadores autocompletando código?", opts: ["GitHub Copilot", "ChatGPT Free", "Live Server", "Git Bash"], ans: "GitHub Copilot", exp: "GitHub Copilot sugiere código y funciones en tiempo real dentro del editor." },
+          { q: "¿Qué es un 'Prompt' en el contexto de la Inteligencia Artificial Generativa?", opts: ["La instrucción o texto enviado al modelo de IA para obtener una respuesta", "El procesador de la computadora", "Un virus de software", "Un tipo de cable de red"], ans: "La instrucción o texto enviado al modelo de IA para obtener una respuesta", exp: "El prompt guía el comportamiento y la salida generada por el LLM." },
+          { q: "¿Qué formato estándar se utiliza para enviar peticiones y recibir datos de una API de IA?", opts: ["JSON", "MP3", "PNG", "EXE"], ans: "JSON", exp: "Las API de IA intercambian información estructurada usando JSON." },
+          { q: "¿Qué significa que un modelo de IA sea un LLM (Large Language Model)?", opts: ["Un modelo entrenado con grandes volúmenes de texto para procesar lenguaje natural", "Un programa para reparar pantallas", "Una base de datos de imágenes", "Un tipo de monitor grande"], ans: "Un modelo entrenado con grandes volúmenes de texto para procesar lenguaje natural", exp: "Los LLM comprenden y generan texto en lenguaje humano con alta coherencia." },
+          { q: "¿Qué función cumple una API Key en la integración de Google AI Studio?", opts: ["Autenticar e identificar las peticiones de la aplicación hacia el servicio de IA", "Descargar programas gratis", "Instalar Windows", "Formatear el disco duro"], ans: "Autenticar e identificar las peticiones de la aplicación hacia el servicio de IA", exp: "La API Key autoriza el acceso a las funciones de modelos de IA." },
+          { q: "¿Qué principio ético es indispensable al programar aplicaciones asistidas por IA?", opts: ["Verificar y validar siempre el código/respuestas generadas por la IA", "Copiar sin revisar absolutamente nada", "Publicar claves API privadas en repositorios públicos", "No permitir que los usuarios usen la app"], ans: "Verificar y validar siempre el código/respuestas generadas por la IA", exp: "El desarrollador debe auditar el código para garantizar seguridad y exactitud." },
+          { q: "¿Qué método HTTP se utiliza habitualmente para enviar el prompt a la API de IA?", opts: ["POST", "GET", "DELETE", "HEAD"], ans: "POST", exp: "Las peticiones POST envían el cuerpo de datos (payload) hacia la API." },
+          { q: "¿Cuál es el objetivo principal del proyecto 'EstudIAnte'?", opts: ["Brindar un tutor pedagógico interactivo asistido por IA para estudiantes", "Calcular la nómina contable", "Crear páginas sin JavaScript", "Jugar videojuegos"], ans: "Brindar un tutor pedagógico interactivo asistido por IA para estudiantes", exp: "EstudIAnte integra IA para fortalecer el aprendizaje y repaso continuo." }
+        ]
+      }
+    ];
+
+    let completed = JSON.parse(localStorage.getItem("repasados_3dsb_clean") || "[]");
+
+    function updateProgress() {
+      localStorage.setItem("repasados_3dsb_clean", JSON.stringify(completed));
+      const pct = Math.round((completed.length / modulosData.length) * 100);
+      document.getElementById("progress-fill").style.width = `${pct}%`;
+      document.getElementById("progress-txt").textContent = `${completed.length} de ${modulosData.length} completados (${pct}%)`;
+    }
+
+    function renderModulos(list) {
+      const container = document.getElementById("contenedor-modulos");
+      container.innerHTML = "";
+      if (list.length === 0) {
+        container.innerHTML = `<p style="grid-column: 1/-1; color: var(--text-muted); text-align:center; padding: 40px 0;">No se encontraron módulos con esos criterios.</p>`;
+        return;
+      }
+
+      list.forEach((mod) => {
+        const isDone = completed.includes(mod.id);
+        const isArcides = mod.docente.includes("Arcides");
+        const card = document.createElement("article");
+        card.className = "card";
+
+        card.innerHTML = `
+          <div class="card-top">
+            <div class="card-header-flex">
+              <span class="card-code">${mod.codigo}</span>
+              <span class="badge-teacher ${isArcides ? 'arcides' : 'javier'}">${mod.docente}</span>
+            </div>
+            <h3 class="card-title">${mod.nombre}</h3>
+            <p class="card-desc">${mod.resumen}</p>
+          </div>
+          <div class="card-actions">
+            <button class="btn btn-primary" onclick="openModal('${mod.id}')">Ver Ficha</button>
+            <button class="btn btn-outline ${isDone ? 'completed' : ''}" onclick="toggleRepaso('${mod.id}')">
+              ${isDone ? '✓ Completado' : 'Marcar'}
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function toggleRepaso(id) {
+      completed = completed.includes(id) ? completed.filter(i => i !== id) : [...completed, id];
+      updateProgress();
+      filterModulos();
+    }
+
+    function filterModulos() {
+      const query = document.getElementById("search-input").value.toLowerCase();
+      const docent = document.getElementById("select-filter").value;
+
+      const filtered = modulosData.filter((m) => {
+        const matchText = m.nombre.toLowerCase().includes(query) || m.codigo.toLowerCase().includes(query) || m.resumen.toLowerCase().includes(query);
+        const matchDocent = docent === "all" || m.docente === docent;
+        return matchText && matchDocent;
+      });
+
+      renderModulos(filtered);
+    }
+
+    function openModal(id) {
+      const mod = modulosData.find(m => m.id === id);
+      if(!mod) return;
+
+      const body = document.getElementById("modal-body");
+      body.innerHTML = `
+        <span style="font-family:var(--font-heading); font-weight:700; color:var(--primary); font-size:0.9rem;">${mod.codigo}</span>
+        <h2 style="font-family:var(--font-heading); font-size:1.35rem; font-weight:800; margin:4px 0 6px;">${mod.nombre}</h2>
+        <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:16px;">Docente encargado: <strong>${mod.docente}</strong></p>
+        
+        <div class="modal-section">
+          <h4>Resumen Ejecutivo</h4>
+          <p>${mod.resumen}</p>
+        </div>
+        <div class="modal-section">
+          <h4>Programas Utilizados</h4>
+          <p>${mod.programas.join(", ")}</p>
+        </div>
+        <div class="modal-section">
+          <h4>Herramientas & Lenguajes</h4>
+          <p>${mod.herramientas.join(", ")}</p>
+        </div>
+        <div class="modal-section">
+          <h4>Instrumentos de Evaluación</h4>
+          <p>${mod.instrumentos.join(", ")}</p>
+        </div>
+        <div class="modal-section">
+          <h4>Recursos Oficiales</h4>
+          <ul>
+            ${mod.recursos.map(r => `<li><a href="${r.url}" target="_blank" style="color:var(--primary); font-weight:500;">${r.titulo}</a></li>`).join('')}
+          </ul>
+        </div>
+      `;
+      document.getElementById("modal-ficha").showModal();
+    }
+
+    // Flashcards Logic
+    let currentCardIdx = 0;
+    let isFlipped = false;
+
+    function renderCard() {
+      const mod = modulosData[currentCardIdx];
+      document.getElementById("card-module").textContent = `${mod.codigo} · ${mod.docente}`;
+      document.getElementById("card-text").textContent = isFlipped ? mod.resumen : mod.nombre;
+      document.getElementById("card-hint").textContent = isFlipped ? "Toca para volver a ver el nombre" : "Toca para revelar el resumen técnico";
+    }
+
+    function flipCard() {
+      isFlipped = !isFlipped;
+      renderCard();
+    }
+
+    function nextCard() {
+      currentCardIdx = (currentCardIdx + 1) % modulosData.length;
+      isFlipped = false;
+      renderCard();
+    }
+
+    function prevCard() {
+      currentCardIdx = (currentCardIdx - 1 + modulosData.length) % modulosData.length;
+      isFlipped = false;
+      renderCard();
+    }
+
+    // QUIZ SYSTEM (10 QUESTIONS PER MODULE, RANDOMIZED OPTIONS)
+    let currentQuizModule = null;
+    let quizQuestions = [];
+    let currentQIdx = 0;
+    let scoreCount = 0;
+
+    function populateQuizSelect() {
+      const select = document.getElementById("quiz-module-select");
+      select.innerHTML = "";
+      modulosData.forEach(mod => {
+        const opt = document.createElement("option");
+        opt.value = mod.id;
+        opt.textContent = `${mod.codigo} — ${mod.nombre}`;
+        select.appendChild(opt);
+      });
+    }
+
+    function shuffleArray(arr) {
+      const array = [...arr];
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function initQuizForModule() {
+      const selectedId = document.getElementById("quiz-module-select").value;
+      currentQuizModule = modulosData.find(m => m.id === selectedId);
+
+      document.getElementById("quiz-start-title").textContent = `Evaluación: ${currentQuizModule.codigo}`;
+      document.getElementById("quiz-screen-start").style.display = "block";
+      document.getElementById("quiz-screen-questions").style.display = "none";
+      document.getElementById("quiz-screen-results").style.display = "none";
+    }
+
+    function startQuiz() {
+      quizQuestions = currentQuizModule.quizQuestions.map(item => {
+        return {
+          question: item.q,
+          correctAnswer: item.ans,
+          explanation: item.exp,
+          shuffledOptions: shuffleArray(item.opts)
+        };
+      });
+
+      currentQIdx = 0;
+      scoreCount = 0;
+
+      document.getElementById("quiz-screen-start").style.display = "none";
+      document.getElementById("quiz-screen-questions").style.display = "block";
+      renderQuizStep();
+    }
+
+    function renderQuizStep() {
+      const q = quizQuestions[currentQIdx];
+      document.getElementById("quiz-mod-title").textContent = `${currentQuizModule.codigo}`;
+      document.getElementById("quiz-step-counter").textContent = `Pregunta ${currentQIdx + 1} de ${quizQuestions.length}`;
+      document.getElementById("quiz-question").textContent = q.question;
+
+      const optsContainer = document.getElementById("quiz-options");
+      optsContainer.innerHTML = "";
+      document.getElementById("quiz-feedback").style.display = "none";
+      document.getElementById("btn-quiz-next").style.display = "none";
+
+      q.shuffledOptions.forEach((optText) => {
+        const btn = document.createElement("button");
+        btn.className = "quiz-option";
+        btn.textContent = optText;
+        btn.onclick = () => handleQuizAnswer(btn, optText, q.correctAnswer, q.explanation);
+        optsContainer.appendChild(btn);
+      });
+    }
+
+    function handleQuizAnswer(selectedBtn, selectedText, correctText, explanation) {
+      const allBtns = document.querySelectorAll(".quiz-option");
+      allBtns.forEach(btn => btn.disabled = true);
+
+      const fb = document.getElementById("quiz-feedback");
+      fb.style.display = "block";
+
+      if (selectedText === correctText) {
+        scoreCount++;
+        selectedBtn.classList.add("correct");
+        fb.style.background = "var(--accent-arcides-light)";
+        fb.style.color = "var(--accent-arcides)";
+        fb.innerHTML = `<strong>¡Correcto!</strong> ${explanation}`;
+      } else {
+        selectedBtn.classList.add("incorrect");
+        allBtns.forEach(btn => {
+          if (btn.textContent === correctText) btn.classList.add("correct");
+        });
+        fb.style.background = "#fee2e2";
+        fb.style.color = "#991b1b";
+        fb.innerHTML = `<strong>Incorrecto.</strong> La respuesta correcta es: ${correctText}. ${explanation}`;
+      }
+
+      document.getElementById("btn-quiz-next").style.display = "inline-block";
+    }
+
+    function nextQuizQuestion() {
+      currentQIdx++;
+      if (currentQIdx < quizQuestions.length) {
+        renderQuizStep();
+      } else {
+        finishQuiz();
+      }
+    }
+
+    function finishQuiz() {
+      document.getElementById("quiz-screen-questions").style.display = "none";
+      document.getElementById("quiz-screen-results").style.display = "block";
+
+      const finalGrade = (scoreCount / quizQuestions.length) * 10;
+      const scoreVal = document.getElementById("quiz-score-val");
+      const scoreMsg = document.getElementById("quiz-score-msg");
+
+      scoreVal.textContent = `${finalGrade.toFixed(1)} / 10`;
+
+      if (finalGrade >= 8.0) {
+        scoreVal.style.color = "var(--accent-arcides)";
+        scoreMsg.innerHTML = `🎉 <strong>¡Excelente desempeño!</strong> Has demostrado dominio del módulo. El módulo <strong>${currentQuizModule.codigo}</strong> ha sido marcado automáticamente como <strong>COMPLETADO</strong>.`;
+        if (!completed.includes(currentQuizModule.id)) {
+          completed.push(currentQuizModule.id);
+          updateProgress();
+          filterModulos();
+        }
+      } else {
+        scoreVal.style.color = "#ef4444";
+        scoreMsg.textContent = `Obtuviste ${scoreCount} de 10 respuestas correctas. Necesitas una nota mínima de 8.0 para marcar el módulo como completado. ¡Repasa el material e inténtalo de nuevo!`;
+      }
+    }
+
+    // Tabs Navigation
+    function switchTab(tabName, evt) {
+      document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+      if (evt) evt.target.classList.add("active");
+
+      document.getElementById("tab-modulos").style.display = tabName === "modulos" ? "block" : "none";
+      document.getElementById("tab-flashcards").style.display = tabName === "flashcards" ? "block" : "none";
+      document.getElementById("tab-quiz").style.display = tabName === "quiz" ? "block" : "none";
+
+      if(tabName === "flashcards") renderCard();
+      if(tabName === "quiz") {
+        populateQuizSelect();
+        initQuizForModule();
+      }
+    }
+
+    // Event Listeners
+    document.getElementById("search-input").addEventListener("input", filterModulos);
+    document.getElementById("select-filter").addEventListener("change", filterModulos);
+    document.getElementById("close-modal").addEventListener("click", () => document.getElementById("modal-ficha").close());
+
+    // Init
+    updateProgress();
+    renderModulos(modulosData);
+  </script>
 </body>
 </html>
