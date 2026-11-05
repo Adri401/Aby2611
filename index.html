@@ -72,13 +72,15 @@
     .card-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
     .card-actions { display: flex; gap: 10px; margin-top: 16px; }
 
+    /* Status Badges on Cards */
+    .status-pill { padding: 10px 14px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; text-align: center; width: 100%; display: block; }
+    .status-pill.pending { background: #f1f5f9; color: var(--text-muted); border: 1px solid var(--border-color); }
+    .status-pill.completed { background: var(--accent-arcides-light); color: var(--accent-arcides); border: 1px solid var(--accent-arcides); }
+
     /* Buttons */
     .btn { flex: 1; padding: 10px 14px; border: 0; border-radius: 8px; font-family: var(--font-body); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: background-color 0.2s; text-align: center; }
     .btn-primary { background: var(--primary); color: #ffffff; }
     .btn-primary:hover { background: var(--primary-hover); }
-    .btn-outline { background: var(--surface); border: 1px solid var(--border-color); color: var(--text-main); }
-    .btn-outline:hover { background: #f1f5f9; }
-    .btn-outline.completed { background: var(--accent-arcides-light); color: var(--accent-arcides); border-color: var(--accent-arcides); }
 
     /* Flashcards Tab */
     .flashcard-container { max-width: 600px; margin: 40px auto; perspective: 1000px; }
@@ -98,7 +100,11 @@
     .quiz-option.incorrect { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
     .quiz-feedback { margin-top: 16px; padding: 12px 16px; border-radius: 8px; font-size: 0.9rem; display: none; }
     .quiz-results { text-align: center; padding: 20px 0; }
-    .quiz-score { font-size: 3rem; font-weight: 800; font-family: var(--font-heading); color: var(--primary); margin: 12px 0; }
+    .quiz-score { font-size: 3.5rem; font-weight: 800; font-family: var(--font-heading); color: var(--primary); margin: 12px 0; }
+
+    /* Passed Banner */
+    .passed-box { background: var(--accent-arcides-light); border: 2px dashed var(--accent-arcides); border-radius: 12px; padding: 30px; text-align: center; margin-top: 10px; }
+    .passed-title { color: var(--accent-arcides); font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
 
     /* Modal */
     dialog { margin: auto; padding: 32px; width: 90%; max-width: 650px; background: var(--surface); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 16px; box-shadow: var(--shadow-lg); }
@@ -137,7 +143,7 @@
     <nav class="tabs-nav">
       <button class="tab-btn active" onclick="switchTab('modulos', event)">Módulos</button>
       <button class="tab-btn" onclick="switchTab('flashcards', event)">Flashcards</button>
-      <button class="tab-btn" onclick="switchTab('quiz', event)">Simulador de Quiz (10 Preguntas)</button>
+      <button class="tab-btn" onclick="switchTab('quiz', event)">Quiz</button>
     </nav>
 
     <!-- TAB 1: MODULOS -->
@@ -163,7 +169,7 @@
           <div class="flashcard-hint" id="card-hint">Toca para revelar la respuesta</div>
         </div>
         <div class="flashcard-nav">
-          <button class="btn btn-outline" onclick="prevCard()">Anterior</button>
+          <button class="btn btn-primary" style="background:#64748b;" onclick="prevCard()">Anterior</button>
           <button class="btn btn-primary" onclick="nextCard()">Siguiente</button>
         </div>
       </div>
@@ -182,8 +188,16 @@
         <div id="quiz-screen-start">
           <div style="text-align: center; padding: 20px 0;">
             <h3 id="quiz-start-title" style="font-family: var(--font-heading); font-size: 1.3rem;">Evaluación Individual</h3>
-            <p style="color: var(--text-muted); margin: 10px 0 20px;">Este examen consta de 10 preguntas con opciones desordenadas aleatoriamente. Si tu nota final es mayor o igual a 8.0/10, el módulo se marcará como <strong>COMPLETADO</strong> automáticamente.</p>
+            <p style="color: var(--text-muted); margin: 10px 0 20px;">Este examen consta de 10 preguntas con respuestas desordenadas aleatoriamente. Para completar automáticamente este módulo debes obtener una nota perfecta de <strong>10.0 / 10</strong>. Los módulos no se pueden marcar manualmente.</p>
             <button class="btn btn-primary" style="max-width: 200px; margin: 0 auto;" onclick="startQuiz()">Iniciar Evaluación</button>
+          </div>
+        </div>
+
+        <div id="quiz-screen-passed" style="display: none;">
+          <div class="passed-box">
+            <div class="passed-title">✓ EVALUACIÓN APROBADA</div>
+            <p style="color: var(--text-main); font-weight: 600; font-size: 1.05rem;">Ya has aprobado el módulo <span id="passed-mod-code" style="color: var(--primary);"></span> con nota perfecta de 10.0 / 10.</p>
+            <p style="color: var(--text-muted); margin-top: 8px; font-size: 0.9rem;">El repaso de este módulo ha sido marcado permanentemente como completado y no puede repetirse.</p>
           </div>
         </div>
 
@@ -204,7 +218,7 @@
           <h3 style="font-family: var(--font-heading); font-size: 1.5rem;">Resultado de la Evaluación</h3>
           <div class="quiz-score" id="quiz-score-val">0.0</div>
           <p id="quiz-score-msg" style="font-weight: 600; margin-bottom: 20px;"></p>
-          <button class="btn btn-primary" style="max-width: 220px; margin: 0 auto;" onclick="initQuizForModule()">Intentar Nuevamente</button>
+          <button class="btn btn-primary" id="btn-quiz-retry" style="max-width: 220px; margin: 0 auto;" onclick="initQuizForModule()">Intentar Nuevamente</button>
         </div>
 
       </div>
@@ -233,9 +247,15 @@
         nombre: "Desarrollo de aplicaciones de software para la solución de problemas",
         docente: "Arcides Canales",
         resumen: "Diseño, lógica e implementación de soluciones de software estructuradas y orientadas a objetos.",
+        detallesRepaso: [
+          "Arquitectura orientada a objetos (POO): clases, objetos, herencia, polimorfismo y encapsulamiento.",
+          "Estructuras de datos y lógica algorítmica fundamental en JavaScript (arreglos, métodos de filtrado y mapeo).",
+          "Control de versiones profesional con Git/GitHub: ciclo de vida de commit, manejo de ramas (branches) y flujo de trabajo colaborativo."
+        ],
+        metricas: "Creación de un repositorio público funcional con historial estructurado y código JavaScript limpio.",
         programas: ["Visual Studio Code", "Git", "Google Chrome"],
         herramientas: ["HTML5", "CSS3", "JavaScript", "GitHub"],
-        instrumentos: ["Rúbrica de evaluación", "Guía de desarrollo N° 1"],
+        instrumentos: ["Rúbrica de evaluación de código", "Guía práctica N° 1"],
         recursos: [
           { titulo: "MDN Web Docs - HTML & JS", url: "https://developer.mozilla.org/es/" },
           { titulo: "Pro Git Book", url: "https://git-scm.com/book/es/v2" }
@@ -259,6 +279,12 @@
         nombre: "Desarrollo de componentes para dispositivos móviles",
         docente: "Arcides Canales",
         resumen: "Diseño de interfaces adaptables, componentes móviles e integración de aplicaciones progresivas (PWA).",
+        detallesRepaso: [
+          "Diseño web responsivo: viewport, unidades relativas (vw, vh, rem) y reglas @media.",
+          "Estructura y manifiesto web (manifest.json): metadatos, iconos de instalación y configuración de vista completa.",
+          "Service Workers: almacenamiento en caché offline, estrategias de sincronización y notificaciones push."
+        ],
+        metricas: "Despliegue de una PWA auditable en Google Lighthouse con rendimiento superior al 85%.",
         programas: ["Android Studio", "VS Code", "Navegador Web"],
         herramientas: ["PWA", "CSS Responsive", "JavaScript", "Flutter"],
         instrumentos: ["Rúbrica de interfaz UI/UX", "Lista de cotejo móvil"],
@@ -284,6 +310,12 @@
         nombre: "Conversación de inglés sobre mantenimiento de sistemas informáticos",
         docente: "Arcides Canales",
         resumen: "Comprensión lectora, vocabulario técnico en inglés y comunicación oral para soporte técnico.",
+        detallesRepaso: [
+          "Glosario informático internacional: hardware, software, networking, troubleshooting y almacenamiento.",
+          "Protocolos verbales de servicio al cliente y soporte de mesas de ayuda (helpdesk).",
+          "Lectura técnica de manuales de hardware, especificaciones de servidores y documentación en inglés."
+        ],
+        metricas: "Presentación oral sobre diagnóstico de sistemas usando fluidez y precisión técnica.",
         programas: ["Duolingo", "Google Translate"],
         herramientas: ["Technical English Glossary", "Grammar Guide"],
         instrumentos: ["Rúbrica de Speaking", "Guía de traducción"],
@@ -309,6 +341,12 @@
         nombre: "Puesta en marcha de la microempresa en asociatividad cooperativa",
         docente: "Arcides Canales",
         resumen: "Modelado de negocios Canvas, análisis presupuestario y organización asociativa.",
+        detallesRepaso: [
+          "Diseño del Business Model Canvas: los 9 bloques de la propuesta de valor hasta flujo de ingresos.",
+          "Estructura financiera básica: costos fijos, variables, punto de equilibrio y flujo de caja proyectado.",
+          "Principios cooperativos y marco legal para el registro formal de microempresas en El Salvador."
+        ],
+        metricas: "Documento ejecutivo de factibilidad técnica, económica y propuesta de valor comercial.",
         programas: ["Microsoft Excel", "Google Sheets", "Canva"],
         herramientas: ["Modelo Canvas", "Matriz FODA"],
         instrumentos: ["Rúbrica de plan de negocios", "Estudio de mercado"],
@@ -334,6 +372,12 @@
         nombre: "Acuerdos de Nivel de Servicio (SLA) y Gestión de Software",
         docente: "Javier Mineros",
         resumen: "Diseño de documentos SLA para estándares de cliente y mejora del sistema 'La esquina del sabor'.",
+        detallesRepaso: [
+          "Fundamentos del SLA (Service Level Agreement): métricas de Uptime, tiempos de respuesta y penalizaciones.",
+          "Levantamiento de Requisitos Funcionales y No Funcionales aplicados al sistema 'La esquina del sabor'.",
+          "Gestión de calidad y entregables bajo contratos de soporte de desarrollo."
+        ],
+        metricas: "Documento oficial SLA redactado e integrado a la arquitectura del sistema del cliente.",
         programas: ["Visual Studio Code", "Microsoft Word"],
         herramientas: ["Plantilla SLA", "Requerimientos de Software"],
         instrumentos: ["Documento SLA de proyecto", "Lista de cotejo de requisitos"],
@@ -359,6 +403,12 @@
         nombre: "Bases de Datos Relacionales y Business Intelligence",
         docente: "Javier Mineros",
         resumen: "Consultas SQL avanzadas en SQL Server y generación de dashboards dinámicos con Power BI y Excel.",
+        detallesRepaso: [
+          "Consultas avanzadas en T-SQL: sentencias CRUD, subconsultas, vistas y procedimientos almacenados.",
+          "Modelado dimensional e integridad referencial (llaves primarias, foráneas e índices).",
+          "Conexión de datos en Power BI / Excel para el armado de dashboards analíticos interactivos."
+        ],
+        metricas: "Base de datos relacional operativa integrada con reporte visual en Power BI.",
         programas: ["SQL Server Management Studio", "Power BI", "Excel"],
         herramientas: ["Lenguaje SQL", "Dashboards Interactivos"],
         instrumentos: ["Guía de consultas SQL", "Rúbrica de Dashboard"],
@@ -384,6 +434,12 @@
         nombre: "Desarrollo Multiplataforma y Sistemas ERP",
         docente: "Javier Mineros",
         resumen: "Desarrollo de aplicaciones con Python, PHP, Avalonia y WPF, e integración modular en Odoo ERP.",
+        detallesRepaso: [
+          "Interfaces multiplataforma con Avalonia UI / WPF utilizando marcado XAML y arquitectura MVVM.",
+          "Arquitectura modular de Odoo ERP: vinculación de ventas, inventario y facturación.",
+          "Servicios backend en Python y PHP para soluciones de escritorio y cliente-servidor."
+        ],
+        metricas: "Aplicación de escritorio conectada con los módulos empresariales en Odoo.",
         programas: ["VS Code", "Odoo ERP", "Visual Studio"],
         herramientas: ["Python", "PHP", "Avalonia UI", "WPF"],
         instrumentos: ["Guía multiplataforma", "Evaluación ERP Odoo"],
@@ -409,6 +465,12 @@
         nombre: "Inteligencia Artificial Aplicada y Proyecto 'EstudIAnte'",
         docente: "Javier Mineros",
         resumen: "Desarrollo de soluciones con Inteligencia Artificial mediante Google AI Studio y GitHub Copilot.",
+        detallesRepaso: [
+          "Integración de LLM mediante APIs con formato JSON en Google AI Studio.",
+          "Ingeniería de Prompts y desarrollo asistido con GitHub Copilot en VS Code.",
+          "Desarrollo completo de la aplicación tutora adaptativa 'EstudIAnte'."
+        ],
+        metricas: "Aplicación funcional 'EstudIAnte' conectada a la API de IA para tutorías dinámicas.",
         programas: ["Visual Studio Code", "Google AI Studio"],
         herramientas: ["GitHub Copilot", "APIs de IA", "JavaScript"],
         instrumentos: ["Rúbrica de innovación tecnológica", "Demostración en vivo"],
@@ -463,20 +525,14 @@
             <p class="card-desc">${mod.resumen}</p>
           </div>
           <div class="card-actions">
-            <button class="btn btn-primary" onclick="openModal('${mod.id}')">Ver Ficha</button>
-            <button class="btn btn-outline ${isDone ? 'completed' : ''}" onclick="toggleRepaso('${mod.id}')">
-              ${isDone ? '✓ Completado' : 'Marcar'}
-            </button>
+            <button class="btn btn-primary" onclick="openModal('${mod.id}')">Ver Ficha Completa</button>
+            <span class="status-pill ${isDone ? 'completed' : 'pending'}">
+              ${isDone ? '✓ Completado (Nota 10)' : 'Pendiente de Quiz'}
+            </span>
           </div>
         `;
         container.appendChild(card);
       });
-    }
-
-    function toggleRepaso(id) {
-      completed = completed.includes(id) ? completed.filter(i => i !== id) : [...completed, id];
-      updateProgress();
-      filterModulos();
     }
 
     function filterModulos() {
@@ -505,6 +561,16 @@
         <div class="modal-section">
           <h4>Resumen Ejecutivo</h4>
           <p>${mod.resumen}</p>
+        </div>
+        <div class="modal-section">
+          <h4>Conceptos Clave de Repaso</h4>
+          <ul>
+            ${mod.detallesRepaso.map(item => `<li>${item}</li>`).join('')}
+          </ul>
+        </div>
+        <div class="modal-section">
+          <h4>Entregables & Métricas de Proyecto</h4>
+          <p>${mod.metricas}</p>
         </div>
         <div class="modal-section">
           <h4>Programas Utilizados</h4>
@@ -556,7 +622,7 @@
       renderCard();
     }
 
-    // QUIZ SYSTEM (10 QUESTIONS PER MODULE, RANDOMIZED OPTIONS)
+    // QUIZ SYSTEM WITH LOCKING & 10.0 GRADE CRITERIA
     let currentQuizModule = null;
     let quizQuestions = [];
     let currentQIdx = 0;
@@ -586,8 +652,19 @@
       const selectedId = document.getElementById("quiz-module-select").value;
       currentQuizModule = modulosData.find(m => m.id === selectedId);
 
+      // Check if module is already completed/passed
+      if (completed.includes(currentQuizModule.id)) {
+        document.getElementById("passed-mod-code").textContent = `${currentQuizModule.codigo} (${currentQuizModule.nombre})`;
+        document.getElementById("quiz-screen-start").style.display = "none";
+        document.getElementById("quiz-screen-passed").style.display = "block";
+        document.getElementById("quiz-screen-questions").style.display = "none";
+        document.getElementById("quiz-screen-results").style.display = "none";
+        return;
+      }
+
       document.getElementById("quiz-start-title").textContent = `Evaluación: ${currentQuizModule.codigo}`;
       document.getElementById("quiz-screen-start").style.display = "block";
+      document.getElementById("quiz-screen-passed").style.display = "none";
       document.getElementById("quiz-screen-questions").style.display = "none";
       document.getElementById("quiz-screen-results").style.display = "none";
     }
@@ -606,6 +683,7 @@
       scoreCount = 0;
 
       document.getElementById("quiz-screen-start").style.display = "none";
+      document.getElementById("quiz-screen-passed").style.display = "none";
       document.getElementById("quiz-screen-questions").style.display = "block";
       renderQuizStep();
     }
@@ -672,12 +750,15 @@
       const finalGrade = (scoreCount / quizQuestions.length) * 10;
       const scoreVal = document.getElementById("quiz-score-val");
       const scoreMsg = document.getElementById("quiz-score-msg");
+      const retryBtn = document.getElementById("btn-quiz-retry");
 
       scoreVal.textContent = `${finalGrade.toFixed(1)} / 10`;
 
-      if (finalGrade >= 8.0) {
+      if (finalGrade === 10.0) {
         scoreVal.style.color = "var(--accent-arcides)";
-        scoreMsg.innerHTML = `🎉 <strong>¡Excelente desempeño!</strong> Has demostrado dominio del módulo. El módulo <strong>${currentQuizModule.codigo}</strong> ha sido marcado automáticamente como <strong>COMPLETADO</strong>.`;
+        scoreMsg.innerHTML = `🎉 <strong>¡CALIFICACIÓN PERFECTA DE 10.0!</strong><br>Has demostrado dominio total de las 10 preguntas. El módulo <strong>${currentQuizModule.codigo}</strong> ha sido completado exitosamente y ya no se podrá repetir.`;
+        retryBtn.style.display = "none";
+        
         if (!completed.includes(currentQuizModule.id)) {
           completed.push(currentQuizModule.id);
           updateProgress();
@@ -685,7 +766,8 @@
         }
       } else {
         scoreVal.style.color = "#ef4444";
-        scoreMsg.textContent = `Obtuviste ${scoreCount} de 10 respuestas correctas. Necesitas una nota mínima de 8.0 para marcar el módulo como completado. ¡Repasa el material e inténtalo de nuevo!`;
+        scoreMsg.innerHTML = `Respondiste correctamente ${scoreCount} de 10 preguntas.<br>Para completar automáticamente el módulo requieres una <strong>nota perfecta de 10.0</strong>. ¡Repasa el contenido y vuelve a intentarlo!`;
+        retryBtn.style.display = "inline-block";
       }
     }
 
